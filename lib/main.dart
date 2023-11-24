@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Task Management',
       initialRoute: "/",
       routes: routes,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

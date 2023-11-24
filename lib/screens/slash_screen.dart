@@ -7,7 +7,7 @@ class SlashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushNamed(context, '/onboarding/1');
+      Navigator.pushNamed(context, '/onboarding');
     });
 
     return Container(
