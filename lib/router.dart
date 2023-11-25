@@ -1,7 +1,8 @@
-import 'package:task_management/screens/MainScreen/activity_screen.dart';
 import 'package:task_management/screens/example/example_screen.dart';
 import 'package:task_management/screens/mainhome/mainhome_screen.dart';
-import 'package:task_management/screens/slash_screen.dart';
+import 'package:task_management/screens/onboarding/onBoard/onboard.dart';
+import 'package:task_management/screens/onboarding/onboard_screen1.dart';
+import 'package:task_management/screens/onboarding/slash_screen.dart';
 
 final routes = {
   "/": (context) => const SlashScreen(),
@@ -9,5 +10,5 @@ final routes = {
   "/example": (context) => const HomeScreen2(),
   "/slash": (context) => const SlashScreen(),
   "/mainhome": (context) => const MainhomeScreen(),
-  "/onboarding": (context) => const ActivityScreen()
+  "/onboarding": (context) => const Onboard()
 };
