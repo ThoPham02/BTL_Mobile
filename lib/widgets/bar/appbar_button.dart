@@ -5,7 +5,6 @@ class AppBarButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return Text("hihi");
+    return const Text("hihi");
   }
 }

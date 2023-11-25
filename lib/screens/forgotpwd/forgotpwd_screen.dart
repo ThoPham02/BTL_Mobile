@@ -8,14 +8,14 @@ class ForgotpwdScreen extends StatelessWidget {
     Widget build(BuildContext context) {
         return Scaffold(
             body: Container(
-				constraints: BoxConstraints.expand(),
-				color: Color(0xFFFFFFFF),
+				constraints: const BoxConstraints.expand(),
+				color: const Color(0xFFFFFFFF),
 				child: Column(
 					crossAxisAlignment: CrossAxisAlignment.start,
 					children: [
 						Expanded(
 							child: Container(
-								color: Color(0xFFfafafa),
+								color: const Color(0xFFfafafa),
 								width: double.infinity,
 								height: double.infinity,
 								child: SingleChildScrollView(
@@ -24,7 +24,7 @@ class ForgotpwdScreen extends StatelessWidget {
 										children: [
 											IntrinsicHeight(
 												child: Container(
-													color: Color(0x33303030),
+													color: const Color(0x33303030),
 													width: double.infinity,
 													child: Column(
 														children: [
@@ -32,17 +32,17 @@ class ForgotpwdScreen extends StatelessWidget {
 																child: Container(
 																	decoration: BoxDecoration(
 																		borderRadius: BorderRadius.circular(15),
-																		color: Color(0xFFffffff),
+																		color: const Color(0xFFffffff),
 																	),
-																	padding: EdgeInsets.only( top: 34, bottom: 22, left: 19, right: 19),
-																	margin: EdgeInsets.only( top: 231),
+																	padding: const EdgeInsets.only( top: 34, bottom: 22, left: 19, right: 19),
+																	margin: const EdgeInsets.only( top: 231),
 																	width: double.infinity,
 																	child: Column(
 																		crossAxisAlignment: CrossAxisAlignment.start,
 																		children: [
 																			Container(
-																				margin: EdgeInsets.only( bottom: 22),
-																				child: Text(
+																				margin: const EdgeInsets.only( bottom: 22),
+																				child: const Text(
 																					'New Password',
 																					style: TextStyle(
 																						color: Color(0xFF303030),
@@ -55,19 +55,19 @@ class ForgotpwdScreen extends StatelessWidget {
 																				child: Container(
 																					decoration: BoxDecoration(
 																						borderRadius: BorderRadius.circular(10),
-																						color: Color(0xFFf8f8f8),
+																						color: const Color(0xFFf8f8f8),
 																					),
-																					padding: EdgeInsets.only( top: 18, bottom: 18, left: 24, right: 24),
-																					margin: EdgeInsets.only( bottom: 33),
+																					padding: const EdgeInsets.only( top: 18, bottom: 18, left: 24, right: 24),
+																					margin: const EdgeInsets.only( bottom: 33),
 																					width: double.infinity,
 																					child: Row(
 																						children: [
 																							Expanded(
 																								child: IntrinsicHeight(
 																									child: Container(
-																										margin: EdgeInsets.only( right: 4),
+																										margin: const EdgeInsets.only( right: 4),
 																										width: double.infinity,
-																										child: Text(
+																										child: const Text(
 																											'Enter your new password',
 																											style: TextStyle(
 																												color: Color(0xFF303030),
@@ -80,7 +80,7 @@ class ForgotpwdScreen extends StatelessWidget {
 																							IntrinsicHeight(
 																								child: Container(
 																									width: 22,
-																									decoration: BoxDecoration(
+																									decoration: const BoxDecoration(
 																										image: DecorationImage(
 																											image: NetworkImage("https://i.imgur.com/1tMFzp8.png"),
 																											fit: BoxFit.cover
@@ -90,7 +90,7 @@ class ForgotpwdScreen extends StatelessWidget {
 																										children: [
 																											Expanded(
 																												child: Container(
-																													margin: EdgeInsets.only( top: 5),
+																													margin: const EdgeInsets.only( top: 5),
 																													height: 6,
 																													width: double.infinity,
 																													child: Image.network(
@@ -108,8 +108,8 @@ class ForgotpwdScreen extends StatelessWidget {
 																				),
 																			),
 																			Container(
-																				margin: EdgeInsets.only( bottom: 22),
-																				child: Text(
+																				margin: const EdgeInsets.only( bottom: 22),
+																				child: const Text(
 																					'Repeat Password',
 																					style: TextStyle(
 																						color: Color(0xFF303030),
@@ -122,19 +122,19 @@ class ForgotpwdScreen extends StatelessWidget {
 																				child: Container(
 																					decoration: BoxDecoration(
 																						borderRadius: BorderRadius.circular(10),
-																						color: Color(0xFFf8f8f8),
+																						color: const Color(0xFFf8f8f8),
 																					),
-																					padding: EdgeInsets.only( top: 19, bottom: 19, left: 24, right: 24),
-																					margin: EdgeInsets.only( bottom: 27),
+																					padding: const EdgeInsets.only( top: 19, bottom: 19, left: 24, right: 24),
+																					margin: const EdgeInsets.only( bottom: 27),
 																					width: double.infinity,
 																					child: Row(
 																						children: [
 																							Expanded(
 																								child: IntrinsicHeight(
 																									child: Container(
-																										margin: EdgeInsets.only( right: 4),
+																										margin: const EdgeInsets.only( right: 4),
 																										width: double.infinity,
-																										child: Text(
+																										child: const Text(
 																											'Enter your new password',
 																											style: TextStyle(
 																												color: Color(0xFF303030),
@@ -147,7 +147,7 @@ class ForgotpwdScreen extends StatelessWidget {
 																							IntrinsicHeight(
 																								child: Container(
 																									width: 22,
-																									decoration: BoxDecoration(
+																									decoration: const BoxDecoration(
 																										image: DecorationImage(
 																											image: NetworkImage("https://i.imgur.com/1tMFzp8.png"),
 																											fit: BoxFit.cover
@@ -157,7 +157,7 @@ class ForgotpwdScreen extends StatelessWidget {
 																										children: [
 																											Expanded(
 																												child: Container(
-																													margin: EdgeInsets.only( top: 5),
+																													margin: const EdgeInsets.only( top: 5),
 																													height: 6,
 																													width: double.infinity,
 																													child: Image.network(
@@ -175,16 +175,16 @@ class ForgotpwdScreen extends StatelessWidget {
 																				),
 																			),
 																			IntrinsicHeight(
-																				child: Container(
+																				child: SizedBox(
 																					width: double.infinity,
 																					child: Row(
 																						children: [
 																							Expanded(
 																								child: IntrinsicHeight(
 																									child: Container(
-																										margin: EdgeInsets.only( right: 4),
+																										margin: const EdgeInsets.only( right: 4),
 																										width: double.infinity,
-																										child: Text(
+																										child: const Text(
 																											'Close',
 																											style: TextStyle(
 																												color: Color(0xFFf26950),
@@ -198,18 +198,18 @@ class ForgotpwdScreen extends StatelessWidget {
 																								child: Container(
 																									decoration: BoxDecoration(
 																										borderRadius: BorderRadius.circular(10),
-																										color: Color(0xFFf26950),
+																										color: const Color(0xFFf26950),
 																									),
 																									width: 46,
 																									child: Stack(
 																										children: [
 																											Padding(
-																												padding: EdgeInsets.symmetric(vertical: 16),
+																												padding: const EdgeInsets.symmetric(vertical: 16),
 																												child: Column(
 																													children: [
 																														Expanded(
 																															child: Container(
-																																margin: EdgeInsets.only( top: 7),
+																																margin: const EdgeInsets.only( top: 7),
 																																height: 1,
 																																width: double.infinity,
 																																child: Image.network(
@@ -226,7 +226,7 @@ class ForgotpwdScreen extends StatelessWidget {
 																												left: 10.849365234375,
 																												width: 7,
 																												height: 14,
-																												child: Container(
+																												child: SizedBox(
 																													width: 7,
 																													height: 14,
 																													child: Image.network(
