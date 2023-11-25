@@ -22,7 +22,7 @@ class MainhomeScreen extends StatelessWidget {
       ),
       bottomNavigationBar: BottomAppBar(
         child: ListView(
-          children: <Widget>[
+          children: const <Widget>[
             Row(),
             Column(),
           ],
