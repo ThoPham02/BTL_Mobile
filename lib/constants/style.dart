@@ -11,3 +11,10 @@ const fontWeightMedium = FontWeight.w500;
 
 const mainFontFamily = "Poppins";
 
+const TextStyle myTextStyle = TextStyle(
+  fontFamily: 'Poppins',
+  fontSize: 15.0,
+  fontWeight: FontWeight.w500,
+  height: 1.6,
+  letterSpacing: 0.0,
+);

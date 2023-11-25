@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -84,29 +84,27 @@ class SignupScreen extends StatelessWidget {
                                         margin: const EdgeInsets.only(right: 1),
                                         width: 22,
                                         child: Column(children: [
-                                          IntrinsicHeight(
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        1.3333333730697632),
-                                                color: const Color(0xFF000000),
-                                              ),
-                                              margin:
-                                                  const EdgeInsets.only(top: 2),
-                                              width: double.infinity,
-                                              child: const SizedBox(),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      1.3333333730697632),
+                                              color: const Color(0xFF000000),
                                             ),
+                                            margin:
+                                                const EdgeInsets.only(top: 2),
+                                            height: 7,
+                                            width: double.infinity,
+                                            child: const SizedBox(),
                                           ),
                                         ]),
                                       ),
                                     ),
-                                    IntrinsicHeight(
-                                      child: Container(
-                                        color: const Color(0xFF000000),
-                                        width: 1,
-                                        child: const SizedBox(),
-                                      ),
+                                    Container(
+                                      color: const Color(0xFF000000),
+                                      width: 1,
+                                      height: 4,
+                                      child: const SizedBox(),
                                     ),
                                   ]),
                                 ),
@@ -132,35 +130,30 @@ class SignupScreen extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        IntrinsicHeight(
-                                          child: Text(
-                                            'Log In',
-                                            style: TextStyle(
-                                              color: Color(0xFF303030),
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                        Text(
+                                          'Log In',
+                                          style: TextStyle(
+                                            color: Color(0xFF303030),
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        IntrinsicHeight(
-                                          child: Text(
-                                            'Sign Up',
-                                            style: TextStyle(
-                                              color: Color(0xFF303030),
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                        Text(
+                                          'Sign Up',
+                                          style: TextStyle(
+                                            color: Color(0xFF303030),
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                       ]),
                                 ),
                               ),
-                              IntrinsicHeight(
-                                child: Container(
-                                  color: const Color(0xFFf26950),
-                                  width: double.infinity,
-                                  child: const SizedBox(),
-                                ),
+                              Container(
+                                color: const Color(0xFFf26950),
+                                height: 3,
+                                width: double.infinity,
+                                child: const SizedBox(),
                               ),
                             ]),
                       ),
@@ -282,16 +275,14 @@ class SignupScreen extends StatelessWidget {
                         width: double.infinity,
                         child: Row(children: [
                           Expanded(
-                            child: IntrinsicHeight(
-                              child: Container(
-                                margin: const EdgeInsets.only(right: 4),
-                                width: double.infinity,
-                                child: const Text(
-                                  'Create your password',
-                                  style: TextStyle(
-                                    color: Color(0xFF303030),
-                                    fontSize: 14,
-                                  ),
+                            child: Container(
+                              margin: const EdgeInsets.only(right: 4),
+                              width: double.infinity,
+                              child: const Text(
+                                'Create your password',
+                                style: TextStyle(
+                                  color: Color(0xFF303030),
+                                  fontSize: 14,
                                 ),
                               ),
                             ),
@@ -351,16 +342,15 @@ class SignupScreen extends StatelessWidget {
                         ]),
                       ),
                     ),
-                    IntrinsicHeight(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: const Color(0xFF000000),
-                        ),
-                        margin: const EdgeInsets.symmetric(horizontal: 120),
-                        width: double.infinity,
-                        child: const SizedBox(),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: const Color(0xFF000000),
                       ),
+                      margin: const EdgeInsets.symmetric(horizontal: 120),
+                      height: 5,
+                      width: double.infinity,
+                      child: const SizedBox(),
                     ),
                   ],
                 )),
