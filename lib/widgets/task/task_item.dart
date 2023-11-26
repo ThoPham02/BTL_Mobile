@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:task_management/models/card.dart';
+import 'package:task_management/models/task.dart';
 
-class CardItem extends StatelessWidget {
-  const CardItem({super.key, required this.card});
+class TaskItem extends StatelessWidget {
+  const TaskItem({super.key, required this.task});
 
-  final CardEntity card;
+  final TaskEntity task;
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +13,7 @@ class CardItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: const Color.fromRGBO(84, 134, 233, 1),
       ),
-      width: 152,
-      height: 200,
+      height: 75,
     );
   }
 }
