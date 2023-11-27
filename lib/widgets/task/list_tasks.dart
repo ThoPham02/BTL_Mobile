@@ -20,6 +20,7 @@ class _ListTaskState extends State<ListTask> {
     return widget.count > 0
         ? ListView.builder(
             itemCount: widget.count,
+            scrollDirection: Axis.vertical,
             itemBuilder: (BuildContext context, int index) {
               TaskEntity task = widget.listTask[index];
               return TaskItem(task: task);
