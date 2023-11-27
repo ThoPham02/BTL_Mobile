@@ -40,6 +40,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
       child: BlocBuilder<MainhomeCubit, MainhomeState>(
           buildWhen: (previous, current) {
         return previous.listCard != current.listCard ||
+            previous.listTask != current.listTask ||
             previous.isProgress != current.isProgress;
       }, builder: (context, state) {
         return Scaffold(
@@ -108,7 +109,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
                 // List card
                 IntrinsicHeight(
                     child: Container(
-                        margin: const EdgeInsets.only(left: 25),
+                        margin: const EdgeInsets.only(left: 25, bottom: 30),
                         child: SizedBox(
                             child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -124,13 +125,15 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
                                   ),
                                 ),
                               ),
+                              const SizedBox(
+                                height: 10,
+                              ),
                               IntrinsicHeight(
                                   child: SizedBox(
                                       height: 200,
                                       child:
                                           ListCard(listCard: state.listCard))),
                             ])))),
-
                 // List task
                 IntrinsicHeight(
                   child: Container(
@@ -162,7 +165,8 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
                           const SizedBox(width: 16.0),
                           IntrinsicHeight(
                               child: TextButton(
-                            onPressed: () => {_cubit.changeTab(false)},
+                            onPressed: () =>
+                                {_cubit.changeTab(false), _cubit.addTask()},
                             child: Text(
                               'Complete',
                               style: TextStyle(
@@ -184,23 +188,25 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
                     width: 60,
                     height: 3,
                     margin: EdgeInsets.only(
-                      top: 2,
-                      left: state.isProgress ? 24 : 140,
-                    ),
+                        top: 2, left: state.isProgress ? 24 : 150, bottom: 15),
                     color: mainColor,
                   ),
                 )),
 
-                SizedBox(
-                  height: 150,
-                  child: ListTask(listTask: state.listTask),
-                )
+                IntrinsicHeight(
+                    child: SizedBox(
+                        height: 315,
+                        child: ListTask(listTask: state.listTask))),
               ],
             ),
           ),
 
           // Bottom Nav
-          bottomNavigationBar: null,
+          // bottomNavigationBar: BottomNavigationBar(items: const [
+          //   BottomNavigationBarItem(icon: searchIcon),
+          //   BottomNavigationBarItem(icon: searchIcon),
+          //   BottomNavigationBarItem(icon: searchIcon),
+          // ]),
         );
       }),
     );

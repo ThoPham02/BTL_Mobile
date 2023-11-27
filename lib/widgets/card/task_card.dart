@@ -13,6 +13,7 @@ class CardItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: const Color.fromRGBO(84, 134, 233, 1),
       ),
+      margin: const EdgeInsets.only(right: 8),
       width: 152,
       height: 200,
     );

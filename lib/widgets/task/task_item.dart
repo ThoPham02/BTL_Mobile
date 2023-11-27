@@ -9,9 +9,8 @@ class TaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: const Color.fromRGBO(84, 134, 233, 1),
+      decoration: const BoxDecoration(
+        color: Color.fromRGBO(84, 134, 233, 1),
       ),
       height: 75,
     );

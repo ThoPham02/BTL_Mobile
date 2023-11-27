@@ -20,6 +20,7 @@ class _ListCardState extends State<ListCard> {
     return widget.count > 0
         ? ListView.builder(
             itemCount: widget.count,
+            scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
               CardEntity card = widget.listCard[index];
               return CardItem(card: card);

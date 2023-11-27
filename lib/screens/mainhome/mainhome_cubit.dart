@@ -16,10 +16,31 @@ class MainhomeCubit extends Cubit<MainhomeState> {
   }
 
   void addCard() {
-    emit(state.copyWith(
-      listCard: [
-        CardEntity(name: "Mobile App Design", numTask: 2)
-      ]
-    ));
+    emit(state.copyWith(listCard: [
+      CardEntity(name: "Mobile App Design", numTask: 2),
+      CardEntity(name: "Mobile App Design", numTask: 2),
+      CardEntity(name: "Mobile App Design", numTask: 2),
+      CardEntity(name: "Mobile App Design", numTask: 2),
+      CardEntity(name: "Mobile App Design", numTask: 2),
+    ]));
+  }
+
+  void addTask() {
+    emit(state.copyWith(listTask: [
+      TaskEntity(name: "Mobile App Design", timeEnd: 2, timeStart: 1),
+      TaskEntity(name: "Mobile App Design", timeEnd: 2, timeStart: 1),
+      TaskEntity(name: "Mobile App Design", timeEnd: 2, timeStart: 1),
+      TaskEntity(name: "Mobile App Design", timeEnd: 2, timeStart: 1),
+      TaskEntity(name: "Mobile App Design", timeEnd: 2, timeStart: 1),
+      TaskEntity(name: "Mobile App Design", timeEnd: 2, timeStart: 1),
+      TaskEntity(name: "Mobile App Design", timeEnd: 2, timeStart: 1),
+      TaskEntity(name: "Mobile App Design", timeEnd: 2, timeStart: 1),
+      TaskEntity(name: "Mobile App Design", timeEnd: 2, timeStart: 1),
+      TaskEntity(name: "Mobile App Design", timeEnd: 2, timeStart: 1),
+      TaskEntity(name: "Mobile App Design", timeEnd: 2, timeStart: 1),
+      TaskEntity(name: "Mobile App Design", timeEnd: 2, timeStart: 1),
+      TaskEntity(name: "Mobile App Design", timeEnd: 2, timeStart: 1),
+      TaskEntity(name: "Mobile App Design", timeEnd: 2, timeStart: 1),
+    ]));
   }
 }
