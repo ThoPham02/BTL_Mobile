@@ -193,10 +193,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
                   ),
                 )),
 
-                IntrinsicHeight(
-                    child: SizedBox(
-                        height: 315,
-                        child: ListTask(listTask: state.listTask))),
+                Expanded(child: ListTask(listTask: state.listTask)),
               ],
             ),
           ),
