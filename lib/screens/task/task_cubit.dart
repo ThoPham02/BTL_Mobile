@@ -11,10 +11,4 @@ class TaskCubit extends Cubit<TaskState> {
       isDescription: isDescription,
     ));
   }
-
-  void increase() {
-    emit(state.copyWith(
-      displayNumber: state.displayNumber + 1,
-    ));
-  }
 }

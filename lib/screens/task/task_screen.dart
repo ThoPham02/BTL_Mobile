@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:task_management/constants/icons.dart';
 import 'package:task_management/constants/style.dart';
+import 'package:task_management/models/task.dart';
 import 'package:task_management/screens/task/task_cubit.dart';
+import 'package:task_management/widgets/time_line/list_time.dart';
+import 'package:task_management/widgets/time_line/time_task.dart';
 
 class TaskScreen extends StatefulWidget {
   const TaskScreen({Key? key}) : super(key: key);
@@ -13,8 +17,6 @@ class TaskScreen extends StatefulWidget {
 
 class _TaskScreenState extends State<TaskScreen> {
   final PageController controller = PageController();
-  final ScrollController _controller =
-      ScrollController(initialScrollOffset: 200.0);
   late final TaskCubit _cubit;
 
   @override
@@ -26,7 +28,6 @@ class _TaskScreenState extends State<TaskScreen> {
   @override
   void dispose() {
     controller.dispose();
-    _controller.dispose();
     super.dispose();
   }
 
@@ -113,24 +114,36 @@ class _TaskScreenState extends State<TaskScreen> {
                         ),
                       ),
                       child: Column(children: <Widget>[
-                        const SizedBox(
-                          height: 25,
-                        ),
                         // list tasks
-                        Stack(
-                          children: [
-                            IntrinsicHeight(
-                              child: Container(
-                                color: blackColor,
-                                height: 300,
-                              ),
-                            )
-                          ],
+                        IntrinsicHeight(
+                          child: SizedBox(
+                            height: 300,
+                            child: ListTime(
+                              // controller: controller,
+                              tasks: [
+                                TaskEntity(
+                                  name: "Create New Feature",
+                                  timeStart: 0,
+                                  timeEnd: 60,
+                                ),
+                                TaskEntity(
+                                  name: "Create New Feature",
+                                  timeStart: 540,
+                                  timeEnd: 615,
+                                ),
+                                TaskEntity(
+                                  name: "Meeting With Team",
+                                  timeStart: 720,
+                                  timeEnd: 795,
+                                )
+                              ],
+                            ),
+                          ),
                         ),
 
                         // Detail for task
                         const SizedBox(
-                          height: 25,
+                          height: 10,
                         ),
                         IntrinsicHeight(
                           child: Container(
@@ -191,6 +204,17 @@ class _TaskScreenState extends State<TaskScreen> {
                             color: mainColor,
                           ),
                         )),
+
+                        Expanded(
+                            child: state.isDescription
+                                ? TimeTask(
+                                    task: TaskEntity(
+                                        name: "hihi",
+                                        timeEnd: 500,
+                                        timeStart: 400))
+                                : Container(
+                                    color: blueColor,
+                                  ))
                       ]),
                     )
                   ],
