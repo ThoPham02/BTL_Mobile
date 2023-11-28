@@ -16,6 +16,7 @@ class TimeTask extends StatelessWidget {
     String timeStart = "";
     String timeEnd = "";
     String? name = task.name;
+
     if (task.timeStart != null && task.timeEnd != null) {
       height = (task.timeEnd! - task.timeStart!) / 1;
       topMargin += task.timeStart! / 1;
@@ -26,8 +27,7 @@ class TimeTask extends StatelessWidget {
       alignment: Alignment.topRight,
       child: Container(
         height: height,
-        width: 260,
-        margin: EdgeInsets.only(top: topMargin),
+        margin: EdgeInsets.only(top: topMargin, left: 47),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           color: blueColor20,

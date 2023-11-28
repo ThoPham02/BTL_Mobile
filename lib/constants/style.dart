@@ -18,6 +18,7 @@ const greyColor = Color(0x00dadada);
 
 // font
 const fontWeightMedium = FontWeight.w600;
+const fontWeightRegular = FontWeight.w400;
 
 const double fontSizeMedium = 15;
 const double fontSizeLarge = 23;

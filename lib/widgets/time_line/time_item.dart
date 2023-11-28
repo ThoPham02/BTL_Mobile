@@ -19,10 +19,12 @@ class TimeItem extends StatelessWidget {
             fontWeight: fontWeightMedium,
           ),
         ),
-        Container(
-          width: 260,
-          height: 1,
-          color: blackColor5,
+        Expanded(
+          child: Container(
+            margin: const EdgeInsets.only(left: 15),
+            height: 1,
+            color: blackColor5,
+          ),
         ),
         const SizedBox(
           height: 60,
