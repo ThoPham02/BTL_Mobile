@@ -6,7 +6,6 @@ import 'package:task_management/constants/style.dart';
 import 'package:task_management/models/task.dart';
 import 'package:task_management/screens/task/task_cubit.dart';
 import 'package:task_management/widgets/time_line/list_time.dart';
-import 'package:task_management/widgets/time_line/time_task.dart';
 
 class TaskScreen extends StatefulWidget {
   const TaskScreen({Key? key}) : super(key: key);
@@ -38,82 +37,84 @@ class _TaskScreenState extends State<TaskScreen> {
         return _cubit;
       },
       child: BlocBuilder<TaskCubit, TaskState>(buildWhen: (previous, current) {
-        return previous.selectedIndex != current.selectedIndex ||
-            previous.isDescription != current.isDescription;
+        return previous != current;
       }, builder: (context, state) {
         return Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                icon: arrowIcon,
-                onPressed: () => Navigator.of(context).pop(),
-              ),
+          appBar: AppBar(
+            leading: IconButton(
+              icon: arrowIcon,
+              onPressed: () => Navigator.of(context).pop(),
             ),
-            body: Stack(
-              children: [
-                // Background
-                Container(
-                  height: double.maxFinite,
-                  width: double.maxFinite,
-                  color: blueColor,
-                ),
-                // Content
-                ListView(
-                  children: <Widget>[
-                    Container(
-                        margin: const EdgeInsets.only(
-                            left: 25, right: 30, bottom: 35),
-                        child: Column(
+          ),
+          body: Stack(
+            children: [
+              // Background
+              Container(
+                height: double.maxFinite,
+                width: double.maxFinite,
+                color: blueColor,
+              ),
+              // Content
+              Column(
+                children: <Widget>[
+                  Container(
+                    margin:
+                        const EdgeInsets.only(left: 25, right: 30, bottom: 35),
+                    child: Column(
+                      children: [
+                        const Column(
                           children: [
-                            const Column(
-                              children: [
-                                IntrinsicHeight(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      SizedBox(
-                                        width: 130,
-                                        child: Text(
-                                          "Mobile App Design",
-                                          style: TextStyle(
-                                              fontWeight: fontWeightMedium,
-                                              fontSize: fontSizeLarge,
-                                              color: whiteColor),
-                                        ),
-                                      ),
-                                      Align(
-                                        alignment: Alignment.topRight,
-                                        child: Text(
-                                          "10 Dec, 2020",
-                                          style: TextStyle(color: whiteColor60),
-                                        ),
-                                      )
-                                    ],
+                            IntrinsicHeight(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  SizedBox(
+                                    width: 130,
+                                    child: Text(
+                                      "Mobile App Design",
+                                      style: TextStyle(
+                                          fontWeight: fontWeightMedium,
+                                          fontSize: fontSizeLarge,
+                                          color: whiteColor),
+                                    ),
                                   ),
-                                )
-                              ],
-                            ),
-                            Container(
-                                margin: const EdgeInsets.only(top: 10),
-                                child: const Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    "3 Tasks Today",
-                                    style: TextStyle(color: whiteColor60),
-                                  ),
-                                ))
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: Text(
+                                      "10 Dec, 2020",
+                                      style: TextStyle(color: whiteColor60),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
                           ],
-                        )),
-                    Container(
-                      height: 553,
-                      decoration: const BoxDecoration(
-                        color: whiteColor,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(25),
-                          topRight: Radius.circular(25),
                         ),
+                        Container(
+                          margin: const EdgeInsets.only(top: 10),
+                          child: const Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "3 Tasks Today",
+                              style: TextStyle(color: whiteColor60),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                      child: Container(
+                    decoration: const BoxDecoration(
+                      color: whiteColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(25),
+                        topRight: Radius.circular(25),
                       ),
-                      child: Column(children: <Widget>[
+                    ),
+                    child: Column(
+                      children: <Widget>[
                         // list tasks
                         IntrinsicHeight(
                           child: SizedBox(
@@ -198,29 +199,45 @@ class _TaskScreenState extends State<TaskScreen> {
                             width: 60,
                             height: 3,
                             margin: EdgeInsets.only(
-                                top: 2,
-                                left: state.isDescription ? 24 : 140,
-                                bottom: 15),
+                              top: 2,
+                              left: state.isDescription ? 25 : 150,
+                            ),
                             color: mainColor,
                           ),
                         )),
 
                         Expanded(
-                            child: state.isDescription
-                                ? TimeTask(
-                                    task: TaskEntity(
-                                        name: "hihi",
-                                        timeEnd: 500,
-                                        timeStart: 400))
-                                : Container(
-                                    color: blueColor,
-                                  ))
-                      ]),
-                    )
-                  ],
-                )
-              ],
-            ));
+                          child: SingleChildScrollView(
+                            child: Container(
+                              margin: const EdgeInsets.only(
+                                left: 25,
+                                right: 25,
+                                top: 15,
+                              ),
+                              child: state.isDescription
+                                  ? Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        "${state.currentTask != null ? state.currentTask?.description : ""}",
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: fontWeightRegular,
+                                          color: blackColor50,
+                                        ),
+                                      ),
+                                    )
+                                  : Container(),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )),
+                ],
+              ),
+            ],
+          ),
+        );
       }),
     );
   }
