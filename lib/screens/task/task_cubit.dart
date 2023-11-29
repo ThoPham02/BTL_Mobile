@@ -12,6 +12,7 @@ class TaskCubit extends Cubit<TaskState> {
       state.copyWith(
         isDescription: isDescription,
         currentTask: TaskEntity(
+            documents: ["ABC", "XYZ", "GHI"],
             description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum mauris nec vel in tristique curabitur. Ridiculus aliquet elit sed fringilla sollicitudin sed. Malesuada ac imperdiet velit feugiat. Sit pretium, nibh diam lorem egestas morbi lorem sapien.'),
       ),

@@ -105,134 +105,167 @@ class _TaskScreenState extends State<TaskScreen> {
                     ),
                   ),
                   Expanded(
-                      child: Container(
-                    decoration: const BoxDecoration(
-                      color: whiteColor,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(25),
-                        topRight: Radius.circular(25),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: whiteColor,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(25),
+                          topRight: Radius.circular(25),
+                        ),
                       ),
-                    ),
-                    child: Column(
-                      children: <Widget>[
-                        // list tasks
-                        IntrinsicHeight(
-                          child: SizedBox(
-                            height: 300,
-                            child: ListTime(
-                              // controller: controller,
-                              tasks: [
-                                TaskEntity(
-                                  name: "Create New Feature",
-                                  timeStart: 0,
-                                  timeEnd: 60,
-                                ),
-                                TaskEntity(
-                                  name: "Create New Feature",
-                                  timeStart: 540,
-                                  timeEnd: 615,
-                                ),
-                                TaskEntity(
-                                  name: "Meeting With Team",
-                                  timeStart: 720,
-                                  timeEnd: 795,
-                                )
-                              ],
+                      child: Column(
+                        children: <Widget>[
+                          // list tasks
+                          IntrinsicHeight(
+                            child: SizedBox(
+                              height: 420,
+                              child: ListTime(
+                                // controller: controller,
+                                tasks: [
+                                  TaskEntity(
+                                    name: "Create New Feature",
+                                    timeStart: 0,
+                                    timeEnd: 60,
+                                  ),
+                                  TaskEntity(
+                                    name: "Create New Feature",
+                                    timeStart: 540,
+                                    timeEnd: 615,
+                                  ),
+                                  TaskEntity(
+                                    name: "Meeting With Team",
+                                    timeStart: 720,
+                                    timeEnd: 795,
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                        ),
 
-                        // Detail for task
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        IntrinsicHeight(
-                          child: Container(
-                            margin: const EdgeInsets.only(left: 15),
-                            width: double.infinity,
-                            child: Row(
+                          // Detail for task
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          IntrinsicHeight(
+                            child: Container(
+                              margin: const EdgeInsets.only(left: 15),
+                              child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   IntrinsicHeight(
-                                      child: TextButton(
-                                    style: TextButton.styleFrom(
-                                      textStyle: const TextStyle(fontSize: 23),
-                                    ),
-                                    onPressed: () {
-                                      _cubit.changeTab(true);
-                                    },
-                                    child: Text(
-                                      'Description',
-                                      style: TextStyle(
-                                        color: state.isDescription
-                                            ? blackColor
-                                            : blackColor50,
-                                        fontSize: fontSizeMedium,
-                                        fontWeight: fontWeightMedium,
+                                    child: TextButton(
+                                      style: TextButton.styleFrom(
+                                        textStyle:
+                                            const TextStyle(fontSize: 23),
+                                      ),
+                                      onPressed: () {
+                                        _cubit.changeTab(true);
+                                      },
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Description',
+                                            style: TextStyle(
+                                              color: state.isDescription
+                                                  ? blackColor
+                                                  : blackColor50,
+                                              fontSize: fontSizeMedium,
+                                              fontWeight: fontWeightMedium,
+                                            ),
+                                          ),
+                                          Container(
+                                            width: state.isDescription ? 60 : 0,
+                                            height: 3,
+                                            margin:
+                                                const EdgeInsets.only(top: 5),
+                                            color: mainColor,
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  )),
+                                  ),
                                   const SizedBox(width: 16.0),
                                   IntrinsicHeight(
-                                      child: TextButton(
-                                    onPressed: () => {
-                                      _cubit.changeTab(false),
-                                    },
-                                    child: Text(
-                                      'Documents',
-                                      style: TextStyle(
-                                        color: state.isDescription
-                                            ? blackColor50
-                                            : blackColor,
-                                        fontSize: fontSizeMedium,
-                                        fontWeight: fontWeightMedium,
-                                      ),
-                                    ),
-                                  )),
-                                ]),
-                          ),
-                        ),
-                        IntrinsicHeight(
-                            child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Container(
-                            width: 60,
-                            height: 3,
-                            margin: EdgeInsets.only(
-                              top: 2,
-                              left: state.isDescription ? 25 : 150,
-                            ),
-                            color: mainColor,
-                          ),
-                        )),
-
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: Container(
-                              margin: const EdgeInsets.only(
-                                left: 25,
-                                right: 25,
-                                top: 15,
+                                    child: TextButton(
+                                        onPressed: () => {
+                                              _cubit.changeTab(false),
+                                            },
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Documents',
+                                              style: TextStyle(
+                                                color: state.isDescription
+                                                    ? blackColor50
+                                                    : blackColor,
+                                                fontSize: fontSizeMedium,
+                                                fontWeight: fontWeightMedium,
+                                              ),
+                                            ),
+                                            Container(
+                                              width:
+                                                  !state.isDescription ? 60 : 0,
+                                              height: 3,
+                                              margin:
+                                                  const EdgeInsets.only(top: 5),
+                                              color: mainColor,
+                                            ),
+                                          ],
+                                        )),
+                                  ),
+                                ],
                               ),
-                              child: state.isDescription
-                                  ? Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        "${state.currentTask != null ? state.currentTask?.description : ""}",
-                                        style: const TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: fontWeightRegular,
-                                          color: blackColor50,
-                                        ),
-                                      ),
-                                    )
-                                  : Container(),
                             ),
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
+                              child: Container(
+                                margin: const EdgeInsets.only(
+                                  left: 25,
+                                  right: 25,
+                                  top: 15,
+                                ),
+                                child: state.currentTask != null
+                                    ? state.isDescription
+                                        ? Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              "${state.currentTask != null ? state.currentTask?.description : ""}",
+                                              style: const TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: fontWeightRegular,
+                                                color: blackColor60,
+                                              ),
+                                            ),
+                                          )
+                                        : IntrinsicHeight(
+                                            child: ListView.builder(
+                                              itemCount: state.currentTask
+                                                  ?.documents?.length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return Container(
+                                                  height: 46,
+                                                  width: 100,
+                                                  color: blackColor50,
+                                                );
+                                              },
+                                            ),
+                                          )
+                                    : null,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  )),
+                  ),
                 ],
               ),
             ],

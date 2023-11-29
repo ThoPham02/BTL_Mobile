@@ -27,7 +27,7 @@ class TimeTask extends StatelessWidget {
       alignment: Alignment.topRight,
       child: Container(
         height: height,
-        margin: EdgeInsets.only(top: topMargin, left: 47),
+        margin: EdgeInsets.only(top: topMargin, left: 57),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           color: blueColor20,

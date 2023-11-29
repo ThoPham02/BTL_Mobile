@@ -21,7 +21,7 @@ class TimeItem extends StatelessWidget {
         ),
         Expanded(
           child: Container(
-            margin: const EdgeInsets.only(left: 15),
+            margin: const EdgeInsets.only(left: 25),
             height: 1,
             color: blackColor5,
           ),

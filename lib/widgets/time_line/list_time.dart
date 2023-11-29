@@ -5,9 +5,10 @@ import 'package:task_management/widgets/time_line/time_task.dart';
 
 class ListTime extends StatelessWidget {
   ListTime({super.key, required this.tasks});
-  static double timeIndex = DateTime.now().hour * 50;
+  static double timeIndex = DateTime.now().hour * 60;
   final ScrollController controller = ScrollController(
-      initialScrollOffset: timeIndex <= 100 ? 0 : timeIndex - 100);
+      initialScrollOffset:
+          timeIndex <= 180 ? 0 : (timeIndex > 1200 ? 1020 : timeIndex - 180));
   final List<TaskEntity> tasks;
 
   @override
@@ -25,7 +26,7 @@ class ListTime extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               SizedBox(
-                height: 1440,
+                height: 1470,
                 child: ListView.builder(
                   itemCount: 24,
                   physics: const NeverScrollableScrollPhysics(),
@@ -34,17 +35,18 @@ class ListTime extends StatelessWidget {
                   },
                 ),
               ),
-              // if (tasks.isNotEmpty)
-              // ListView.builder(
-              //   itemCount: tasks.length,
-              //   itemBuilder: (context, index) {
-              //     TaskEntity task = tasks[index];
-              //     return TimeTask(task: task);
-              //   },
-              // ),
-              TimeTask(task: tasks[0]),
-              TimeTask(task: tasks[1]),
-              TimeTask(task: tasks[2]),
+              if (tasks.isNotEmpty)
+                SizedBox(
+                  height: 1470,
+                  child: Stack(
+                    children: List.generate(
+                      tasks.length,
+                      (index) {
+                        return TimeTask(task: tasks[index]);
+                      },
+                    ),
+                  ),
+                )
             ],
           ),
         ),
