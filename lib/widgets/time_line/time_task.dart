@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:task_management/constants/style.dart';
 import 'package:task_management/constants/utils.dart';
-import 'package:task_management/models/task.dart';
+import 'package:task_management/models/task_entity.dart';
 
 class TimeTask extends StatelessWidget {
   const TimeTask({super.key, required this.task});

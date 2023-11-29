@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task_management/models/task.dart';
+import 'package:task_management/models/task_entity.dart';
 import 'package:task_management/widgets/time_line/time_item.dart';
 import 'package:task_management/widgets/time_line/time_task.dart';
 
