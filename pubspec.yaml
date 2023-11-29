@@ -46,6 +46,7 @@ dependencies:
   permission_handler:
   fl_chart: ^0.64.0
   percent_indicator: ^3.0.1
+  isar_flutter_libs: ^3.1.0+1
   
 dev_dependencies:
   flutter_test:
@@ -57,6 +58,9 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  isar_generator: ^3.1.0+1
+  build_runner: ^2.4.7
+  analyzer: ^5.13.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

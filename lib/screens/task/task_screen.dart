@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:task_management/constants/icons.dart';
 import 'package:task_management/constants/style.dart';
-import 'package:task_management/models/task.dart';
+import 'package:task_management/models/task_entity.dart';
 import 'package:task_management/screens/task/task_cubit.dart';
 import 'package:task_management/widgets/time_line/list_time.dart';
 
