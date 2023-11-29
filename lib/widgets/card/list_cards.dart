@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task_management/models/card.dart';
+import 'package:task_management/models/card_entity.dart';
 import 'package:task_management/widgets/card/task_card.dart';
 
 class ListCard extends StatefulWidget {

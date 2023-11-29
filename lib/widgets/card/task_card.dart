@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task_management/models/card.dart';
+import 'package:task_management/models/card_entity.dart';
 
 class CardItem extends StatelessWidget {
   const CardItem({super.key, required this.card});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task_management/models/task.dart';
+import 'package:task_management/models/task_entity.dart';
 import 'package:task_management/widgets/task/task_item.dart';
 
 class ListTask extends StatefulWidget {

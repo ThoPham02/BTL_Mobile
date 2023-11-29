@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:task_management/models/card.dart';
-import 'package:task_management/models/task.dart';
+import 'package:task_management/models/card_entity.dart';
+import 'package:task_management/models/task_entity.dart';
 
 part 'mainhome_state.dart';
 
