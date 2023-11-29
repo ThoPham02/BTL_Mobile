@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:task_management/login_signup/login_screen.dart';
-// import 'package:flutter_svg/svg.dart';
+import 'package:task_management/screens/login_signup/login.dart';
 import 'package:task_management/screens/onboarding/onboard_screen1.dart';
 import 'package:task_management/screens/onboarding/onboard_screen2.dart';
 
@@ -43,7 +42,7 @@ class _OnboardState extends State<Onboard> {
               } else {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  MaterialPageRoute(builder: (context) => const AuthScreen()),
                 );
               }
             },

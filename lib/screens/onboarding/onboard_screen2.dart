@@ -64,33 +64,6 @@ class _OnboardScreen2State extends State<OnboardScreen2> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  // InkWell(
-                  //   onTap: () {
-                  //     if (_selectedIndex == 0) {
-                  //       controller.jumpToPage(1);
-                  //     } else {
-                  //       controller.jumpToPage(0);
-                  //     }
-                  //   },
-                  //   child: Container(
-                  //     alignment: Alignment.center,
-                  //     margin: const EdgeInsets.only(bottom: 35),
-                  //     height: 57,
-                  //     width: 325,
-                  //     decoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(15),
-                  //       color: const Color(0xFFF26950),
-                  //     ),
-                  //     child: const Text(
-                  //       "Get Started",
-                  //       style: TextStyle(
-                  //         fontWeight: FontWeight.w700,
-                  //         fontSize: 18,
-                  //         color: Colors.white,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   Spacer(),
                 ],
               ),
