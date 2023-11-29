@@ -15,7 +15,7 @@ extension GetCardEntityCollection on Isar {
 
 const CardEntitySchema = CollectionSchema(
   name: r'CardEntity',
-  id: 8921433643831792852,
+  id: 1,
   properties: {
     r'name': PropertySchema(
       id: 0,
@@ -45,7 +45,7 @@ const CardEntitySchema = CollectionSchema(
   idName: r'id',
   indexes: {
     r'userID': IndexSchema(
-      id: 5409443695161892061,
+      id: 2,
       name: r'userID',
       unique: false,
       replace: false,
