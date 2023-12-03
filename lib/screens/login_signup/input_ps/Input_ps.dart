@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:task_management/screens/login_signup/input_ps/on_offPs.dart';
 
 class InputPS extends StatefulWidget {
   final String hintText;
-  const InputPS({super.key, required this.hintText});
+
+  const InputPS({Key? key, required this.hintText}) : super(key: key);
 
   @override
-  State<InputPS> createState() => _InputPSState(hintText: '');
+  _InputPSState createState() => _InputPSState();
 }
 
 class _InputPSState extends State<InputPS> {
   bool isPasswordVisible = false;
-  final String hintText;
-
-  _InputPSState({required this.hintText});
   @override
   Widget build(BuildContext context) {
     double baseWidth = 375;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
+
     return Row(
       children: [
         Expanded(
@@ -26,7 +25,7 @@ class _InputPSState extends State<InputPS> {
             obscureText: !isPasswordVisible,
             decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: "Create your password",
+              hintText: widget.hintText,
               hintStyle: TextStyle(
                 fontSize: 14 * ffem,
                 fontWeight: FontWeight.w400,
@@ -36,26 +35,12 @@ class _InputPSState extends State<InputPS> {
             ),
           ),
         ),
-        GestureDetector(
-          onTap: () {
+        HiddenPs(
+          onVisibilityChanged: (isVisible) {
             setState(() {
-              isPasswordVisible = !isPasswordVisible;
+              isPasswordVisible = isVisible;
             });
           },
-          child: SizedBox(
-            width: 22.13 * fem,
-            height: 22 * fem,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                SvgPicture.asset(
-                  isPasswordVisible
-                      ? 'assets/vectors/eye.svg'
-                      : 'assets/vectors/eye_off.svg',
-                ),
-              ],
-            ),
-          ),
         ),
       ],
     );
