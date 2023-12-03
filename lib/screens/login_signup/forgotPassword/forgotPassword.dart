@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:task_management/constants/style.dart';
+import 'package:task_management/screens/login_signup/forgotPassword/forgotPassword1.dart';
+import 'package:task_management/screens/login_signup/forgotPassword/forgotPassword2.dart';
+import 'package:task_management/screens/login_signup/forgotPassword/forgotPassword3.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -10,78 +12,100 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
-  @override
-  Widget build(BuildContext context) {
-    double baseWidth = 375;
-    double fem = MediaQuery.of(context).size.width / baseWidth;
-    double ffem = fem * 0.97;
-    return GestureDetector(
-      onTap: () {
-        // Hiển thị AlertDialog khi người dùng nhấn vào forgotPassword
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Forgot Password'),
-              content: SizedBox(
-                width: 400 * fem, // Đặt chiều rộng tùy ý
-                height: 190 * fem, // Đặt chiều cao tùy ý
-                child: const Text('Your custom content goes here.'),
+  final PageController _pageController = PageController(initialPage: 0);
+
+  void _showForgotPasswordDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          margin: const EdgeInsets.fromLTRB(0, 0, 0, 25),
+          child: AlertDialog(
+            content: SizedBox(
+              width: 400,
+              height: 280,
+              child: PageView(
+                controller: _pageController,
+                children: const [
+                  ForgotPassword1(),
+                  ForgotPassword2(),
+                  ForgotPassword3(),
+                ],
               ),
-              actions: [
-                Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.start, // Đặt chúng ở bên trái
+            ),
+            contentPadding: const EdgeInsets.all(25),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            actions: [
+              Container(
+                margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pop(); // Đóng AlertDialog
+                        Navigator.of(context).pop();
                       },
-                      child: Container(
-                        margin: EdgeInsets.fromLTRB(0, 0, 16 * fem, 0),
-                        child: Text(
-                          'Close',
-                          style: TextStyle(
-                            fontFamily: 'Nunito Sans',
-                            fontSize: 14 * fem,
-                            fontWeight: FontWeight.w400,
-                            height: 1.7857142857 * fem,
-                            color: const Color(0x7ff26950),
-                          ),
+                      child: const Text(
+                        'Close',
+                        style: TextStyle(
+                          fontFamily: 'Nunito Sans',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          height: 1.7857142857,
+                          color: Color(0x7ff26950),
                         ),
                       ),
                     ),
-                    const Spacer(),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pop(); // Đóng AlertDialog
+                        if (_pageController.page == 2) {
+                          Navigator.of(context).pop(); // Close AlertDialog
+                          // Perform final actions like sending a password reset request
+                        } else {
+                          _pageController.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        }
                       },
                       child: Container(
-                        width: 46 * fem,
-                        height: 46 * fem,
+                        width: 46,
+                        height: 46,
                         decoration: BoxDecoration(
-                          color: mainColor, // Thay đổi màu nền tùy ý
-                          borderRadius: BorderRadius.circular(10 * fem),
+                          color: mainColor,
+                          borderRadius: BorderRadius.circular(10),
                           border: Border.all(
-                            color: mainColor, // Thay đổi màu của border tùy ý
-                            width: 2.0 * fem,
+                            color: mainColor,
+                            width: 2.0,
                           ),
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.arrow_forward_outlined,
-                          color:
-                              Colors.white, // Thay đổi màu của biểu tượng tùy ý
-                          size: 20 * fem,
+                          color: Colors.white,
+                          size: 20,
                         ),
                       ),
                     ),
                   ],
                 ),
-              ],
-            );
-          },
+              ),
+            ],
+          ),
         );
       },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    double baseWidth = 375;
+    double fem = MediaQuery.of(context).size.width / baseWidth;
+    double ffem = fem * 0.97;
+
+    return InkWell(
+      onTap: _showForgotPasswordDialog,
       child: Container(
         margin: EdgeInsets.fromLTRB(212 * fem, 0 * fem, 0 * fem, 32 * fem),
         child: Text(

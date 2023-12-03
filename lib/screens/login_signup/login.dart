@@ -12,8 +12,6 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   bool showLoginPage = true;
-  bool isPasswordVisible = false;
-
   void togglePages() {
     setState(() {
       showLoginPage = !showLoginPage;

@@ -281,7 +281,7 @@ class SignUpScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            child: const InputPS(
+                            child: InputPS(
                               hintText: 'Create your password',
                             ),
                           ),
