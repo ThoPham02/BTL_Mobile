@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:task_management/screens/MainScreen/SidebarScreen/drawerscreen.dart';
-import 'package:task_management/screens/MainScreen/SidebarScreen/testscreen.dart';
+import 'package:task_management/screens/main_screen/sidebar/drawer_screen.dart';
+import 'package:task_management/screens/main_screen/sidebar/test_screen.dart';
 
 class Sidebar extends StatefulWidget {
   const Sidebar({super.key});
