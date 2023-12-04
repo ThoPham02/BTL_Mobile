@@ -15,7 +15,7 @@ extension GetTaskEntityCollection on Isar {
 
 const TaskEntitySchema = CollectionSchema(
   name: r'TaskEntity',
-  id: 4,
+  id: -2911998186285533288,
   properties: {
     r'cardID': PropertySchema(
       id: 0,
@@ -55,7 +55,7 @@ const TaskEntitySchema = CollectionSchema(
   idName: r'id',
   indexes: {
     r'name': IndexSchema(
-      id: 3,
+      id: 879695947855722453,
       name: r'name',
       unique: false,
       replace: false,
