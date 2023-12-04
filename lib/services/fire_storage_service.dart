@@ -3,13 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:task_management/models/user_entity.dart';
 
 class FireStorageService {
-  final CollectionReference _phonesCollectionReference =
+  final CollectionReference _usersCollectionReference =
       FirebaseFirestore.instance.collection('user');
 
-  Future createPhoneNumber(UserEntity user) async {
+  Future createUser(UserEntity user) async {
     try {
-      await _phonesCollectionReference
-          .doc(user.id.toString())
+      await _usersCollectionReference
+          .doc(user.userID.toString())
           .set(user.toJson());
     } catch (e) {
       if (e is PlatformException) {

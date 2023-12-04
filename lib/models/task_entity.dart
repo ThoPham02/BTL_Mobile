@@ -1,12 +1,11 @@
-import 'package:isar/isar.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'task_entity.g.dart';
 
-@collection
+@JsonSerializable()
 class TaskEntity {
-  Id id = Isar.autoIncrement;
-
-  @Index(type: IndexType.value)
+  @JsonKey()
+  final int? taskID;
   final String? name;
   final int? cardID;
   final int? timeStart;
@@ -15,6 +14,7 @@ class TaskEntity {
   final List<String>? documents;
 
   TaskEntity({
+    this.taskID,
     this.name,
     this.cardID,
     this.timeStart,
@@ -22,4 +22,9 @@ class TaskEntity {
     this.description,
     this.documents,
   });
+
+  factory TaskEntity.fromJson(Map<String, dynamic> data) =>
+      _$TaskEntityFromJson(data);
+
+  Map<String, dynamic> toJson() => _$TaskEntityToJson(this);
 }
