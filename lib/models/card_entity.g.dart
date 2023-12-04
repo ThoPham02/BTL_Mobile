@@ -15,7 +15,7 @@ extension GetCardEntityCollection on Isar {
 
 const CardEntitySchema = CollectionSchema(
   name: r'CardEntity',
-  id: 1,
+  id: 8921433643831792852,
   properties: {
     r'name': PropertySchema(
       id: 0,
@@ -45,7 +45,7 @@ const CardEntitySchema = CollectionSchema(
   idName: r'id',
   indexes: {
     r'userID': IndexSchema(
-      id: 2,
+      id: 5409443695161892061,
       name: r'userID',
       unique: false,
       replace: false,
@@ -930,3 +930,23 @@ extension CardEntityQueryProperty
     });
   }
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+CardEntity _$CardEntityFromJson(Map<String, dynamic> json) => CardEntity(
+      userID: json['userID'] as int?,
+      name: json['name'] as String?,
+      numTask: json['numTask'] as int?,
+      timeDay: json['timeDay'] as int?,
+    )..id = json['id'] as int;
+
+Map<String, dynamic> _$CardEntityToJson(CardEntity instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'userID': instance.userID,
+      'name': instance.name,
+      'numTask': instance.numTask,
+      'timeDay': instance.timeDay,
+    };
