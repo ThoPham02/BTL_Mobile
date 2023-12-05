@@ -102,9 +102,11 @@ class _DrawerScreenState extends State<DrawerScreen> {
               ),
             ],
           ),
-          SvgPicture.asset(
-            'assets/vectors/analytics.svg',
-          ),
+          Expanded(
+            child: SvgPicture.asset(
+              'assets/vectors/analytics.svg',
+            ),
+          )
         ],
       ),
     );
