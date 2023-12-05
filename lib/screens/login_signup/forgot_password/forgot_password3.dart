@@ -9,6 +9,10 @@ class ForgotPassword3 extends StatefulWidget {
 }
 
 class _ForgotPassword3State extends State<ForgotPassword3> {
+  final TextEditingController _newPasswordController = TextEditingController();
+  final TextEditingController _checkNewPasswordController =
+      TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double baseWidth = 375;
@@ -57,8 +61,9 @@ class _ForgotPassword3State extends State<ForgotPassword3> {
                       ),
                     ],
                   ),
-                  child: const InputPS(
+                  child: InputPS(
                     hintText: 'Enter your new password',
+                    controller: _newPasswordController,
                   ),
                 ),
               ],
@@ -105,7 +110,10 @@ class _ForgotPassword3State extends State<ForgotPassword3> {
                     color: const Color(0xfff8f8f8),
                     borderRadius: BorderRadius.circular(10 * fem),
                   ),
-                  child: const InputPS(hintText: 'Enter your new password'),
+                  child: InputPS(
+                    hintText: 'Enter your new password',
+                    controller: _checkNewPasswordController,
+                  ),
                 ),
               ],
             ),

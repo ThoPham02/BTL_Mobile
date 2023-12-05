@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:task_management/constants/style.dart';
 import 'package:task_management/screens/login_signup/signup_screen.dart';
 import 'package:task_management/screens/login_signup/login_screen.dart';
 

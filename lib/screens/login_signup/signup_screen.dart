@@ -1,9 +1,25 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:task_management/screens/login_signup/input_ps/Input_ps.dart';
 
-class SignUpScreen extends StatelessWidget {
+import '../../services/firebase_auth_service.dart';
+
+class SignUpScreen extends StatefulWidget {
   final void Function()? onTap;
-  SignUpScreen({super.key, this.onTap});
+
+  const SignUpScreen({super.key, this.onTap});
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _checkPasswordController =
+      TextEditingController();
 
   bool isPasswordVisible = false;
   @override
@@ -65,7 +81,7 @@ class SignUpScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 GestureDetector(
-                                  onTap: onTap,
+                                  onTap: widget.onTap,
                                   child: Container(
                                     margin: EdgeInsets.fromLTRB(
                                         0 * fem, 0 * fem, 120 * fem, 1 * fem),
@@ -283,6 +299,7 @@ class SignUpScreen extends StatelessWidget {
                             ),
                             child: InputPS(
                               hintText: 'Create your password',
+                              controller: _passwordController,
                             ),
                           ),
                         ],
@@ -306,11 +323,13 @@ class SignUpScreen extends StatelessWidget {
                         ],
                       ),
                       child: Center(
-                        child: Center(
+                        child: TextButton(
+                          onPressed: _signUpHandle,
                           child: Text(
                             'Login',
                             textAlign: TextAlign.center,
                             style: TextStyle(
+                              fontFamily: 'Nunito Sans',
                               fontSize: 18 * ffem,
                               fontWeight: FontWeight.w700,
                               height: 1.3625 * ffem / fem,
@@ -339,5 +358,23 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _signUpHandle() async {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+    String checkPassword = _checkPasswordController.text;
+
+    if (checkPassword != password) {
+      // todo
+    }
+
+    User? user = await _auth.signUp(email, password);
+
+    if (user != null) {
+      print("user is successfully created");
+    } else {
+      print("Some error in sign up");
+    }
   }
 }

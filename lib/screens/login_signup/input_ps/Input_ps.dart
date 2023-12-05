@@ -3,8 +3,10 @@ import 'package:task_management/screens/login_signup/input_ps/on_offPs.dart';
 
 class InputPS extends StatefulWidget {
   final String hintText;
+  final TextEditingController controller;
 
-  const InputPS({Key? key, required this.hintText}) : super(key: key);
+  const InputPS({Key? key, required this.hintText, required this.controller})
+      : super(key: key);
 
   @override
   _InputPSState createState() => _InputPSState();
@@ -22,6 +24,7 @@ class _InputPSState extends State<InputPS> {
       children: [
         Expanded(
           child: TextField(
+            controller: widget.controller,
             obscureText: !isPasswordVisible,
             decoration: InputDecoration(
               border: InputBorder.none,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:task_management/constants/style.dart';
-import 'package:task_management/screens/login_signup/forgotPassword/forgotPassword.dart';
+import 'package:task_management/screens/login_signup/forgot_password/forgot_password.dart';
 import 'package:task_management/screens/login_signup/input_ps/Input_ps.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -11,6 +10,8 @@ class LoginScreen extends StatelessWidget {
 
   final ValueNotifier<bool> isPasswordVisibleNotifier =
       ValueNotifier<bool>(false);
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -172,6 +173,7 @@ class LoginScreen extends StatelessWidget {
                                 ],
                               ),
                               child: TextField(
+                                controller: _emailController,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Enter your username or E-mail",
@@ -224,8 +226,10 @@ class LoginScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            child:
-                                const InputPS(hintText: 'Enter your password'),
+                            child: InputPS(
+                              hintText: 'Enter your password',
+                              controller: _passwordController,
+                            ),
                           ),
                         ],
                       ),
@@ -248,7 +252,8 @@ class LoginScreen extends StatelessWidget {
                         ],
                       ),
                       child: Center(
-                        child: Center(
+                        child: TextButton(
+                          onPressed: null,
                           child: Text(
                             'Login',
                             textAlign: TextAlign.center,
