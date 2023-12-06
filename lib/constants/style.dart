@@ -10,6 +10,7 @@ const blackColor5 = Color.fromRGBO(48, 48, 48, 0.05);
 
 const whiteColor = Color.fromRGBO(255, 255, 255, 1);
 const whiteColor60 = Color.fromRGBO(255, 255, 255, 0.6);
+const whiteColor20 = Color.fromRGBO(255, 255, 255, 0.2);
 
 const blueColor = Color.fromRGBO(84, 134, 233, 1);
 const blueColor20 = Color.fromRGBO(84, 134, 233, 0.2);

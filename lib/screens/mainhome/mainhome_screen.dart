@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
-import 'package:task_management/constants/icons.dart';
 import 'package:task_management/constants/style.dart';
+import 'package:task_management/models/card_entity.dart';
 import 'package:task_management/screens/mainhome/mainhome_cubit.dart';
-import 'package:task_management/widgets/bar/appbar_button.dart';
-import 'package:task_management/widgets/card/list_cards.dart';
-import 'package:task_management/widgets/task/list_tasks.dart';
 
 class MainhomeScreen extends StatefulWidget {
   const MainhomeScreen({Key? key}) : super(key: key);
@@ -22,6 +20,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
   @override
   void initState() {
     _cubit = MainhomeCubit();
+    _cubit.addCard();
     super.initState();
   }
 
@@ -44,153 +43,14 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
             previous.isProgress != current.isProgress;
       }, builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(
-            title: const Text(""),
-            leading: const AppBarButton(),
-            actions: const <Widget>[
-              IconButton(onPressed: null, icon: bellIcon),
-            ],
-          ),
+          appBar: _homeAppBar(),
           body: ListView(
-            scrollDirection: Axis.horizontal,
+            scrollDirection: Axis.vertical,
             children: [
-              // Welcome message
-              Align(
-                alignment: Alignment.topLeft,
-                child: Container(
-                  margin: const EdgeInsets.only(left: 25, right: 25),
-                  child: const Text(
-                    'Hello, Jessi',
-                    style: TextStyle(
-                      color: Color(0xFF000000),
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Container(
-                  margin:
-                      const EdgeInsets.only(bottom: 27, left: 25, right: 26),
-                  child: const Text(
-                    'Complete your taks today',
-                    style: TextStyle(
-                      color: Color(0xFF303030),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ),
-
-              // Search Input
-              IntrinsicHeight(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: const Color.fromARGB(255, 233, 232, 232),
-                  ),
-                  margin:
-                      const EdgeInsets.only(bottom: 25, left: 25, right: 25),
-                  width: double.infinity,
-                  child: const TextField(
-                    decoration: InputDecoration(
-                      prefixIcon: searchIcon,
-                      hintText: 'Search Your Task',
-                      border: InputBorder.none,
-                    ),
-                    onChanged: null,
-                  ),
-                ),
-              ),
-
-              // List card
-              IntrinsicHeight(
-                  child: Container(
-                      margin: const EdgeInsets.only(left: 25, bottom: 30),
-                      child: SizedBox(
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                            const Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                'My Task',
-                                style: TextStyle(
-                                  color: Color(0xFF000000),
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            IntrinsicHeight(
-                                child: SizedBox(
-                                    height: 200,
-                                    child: ListCard(listCard: state.listCard))),
-                          ])))),
-              // List task
-              IntrinsicHeight(
-                child: Container(
-                  margin: const EdgeInsets.only(left: 15),
-                  width: double.infinity,
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        IntrinsicHeight(
-                            child: TextButton(
-                          style: TextButton.styleFrom(
-                            textStyle: const TextStyle(fontSize: 23),
-                          ),
-                          onPressed: () {
-                            _cubit.changeTab(true);
-                            _cubit.addCard();
-                          },
-                          child: Text(
-                            'In Progress',
-                            style: TextStyle(
-                              color:
-                                  state.isProgress ? blackColor : blackColor50,
-                              fontSize: fontSizeMedium,
-                              fontWeight: fontWeightMedium,
-                            ),
-                          ),
-                        )),
-                        const SizedBox(width: 16.0),
-                        IntrinsicHeight(
-                            child: TextButton(
-                          onPressed: () =>
-                              {_cubit.changeTab(false), _cubit.addTask()},
-                          child: Text(
-                            'Complete',
-                            style: TextStyle(
-                              color:
-                                  state.isProgress ? blackColor50 : blackColor,
-                              fontSize: fontSizeMedium,
-                              fontWeight: fontWeightMedium,
-                            ),
-                          ),
-                        )),
-                      ]),
-                ),
-              ),
-              IntrinsicHeight(
-                  child: Align(
-                alignment: Alignment.topLeft,
-                child: Container(
-                  width: 60,
-                  height: 3,
-                  margin: EdgeInsets.only(
-                      top: 2, left: state.isProgress ? 24 : 150, bottom: 15),
-                  color: mainColor,
-                ),
-              )),
-
-              Expanded(child: ListTask(listTask: state.listTask)),
+              _welcomeMessage(),
+              _searchInput(),
+              _listCards(state),
+              _listTask(state),
             ],
           ),
 
@@ -202,6 +62,315 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
           // ]),
         );
       }),
+    );
+  }
+
+  Column _listTask(MainhomeState state) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 20, left: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 23),
+                ),
+                onPressed: () {
+                  _cubit.changeTab(true);
+                  _cubit.addCard();
+                },
+                child: Text(
+                  'In Progress',
+                  style: TextStyle(
+                    color: state.isProgress ? blackColor : blackColor50,
+                    fontSize: fontSizeMedium,
+                    fontWeight: fontWeightMedium,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16.0),
+              TextButton(
+                onPressed: () => {_cubit.changeTab(false), _cubit.addTask()},
+                child: Text(
+                  'Complete',
+                  style: TextStyle(
+                    color: state.isProgress ? blackColor50 : blackColor,
+                    fontSize: fontSizeMedium,
+                    fontWeight: fontWeightMedium,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Align(
+          alignment: Alignment.topLeft,
+          child: Container(
+            width: 60,
+            height: 3,
+            margin:
+                EdgeInsets.only(left: state.isProgress ? 30 : 160, bottom: 15),
+            color: mainColor,
+          ),
+        ),
+        SizedBox(
+          height: 400,
+          child: ListView.builder(
+            itemCount: state.listCard.length,
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index) {
+              CardEntity item = state.listCard[index];
+              return Container(
+                height: 75,
+                padding: const EdgeInsets.only(
+                  left: 40,
+                  right: 35,
+                  top: 10,
+                  bottom: 10,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "${item.name}",
+                          style: const TextStyle(
+                            fontWeight: fontWeightMedium,
+                            fontSize: 15,
+                            color: blackColor,
+                          ),
+                        ),
+                        Text(
+                          "${item.name}",
+                          style: const TextStyle(
+                            fontWeight: fontWeightRegular,
+                            fontSize: 13,
+                            color: blackColor50,
+                          ),
+                        ),
+                      ],
+                    ),
+                    GestureDetector(
+                      onTap: null,
+                      child: Container(
+                        width: 36,
+                        height: 36,
+                        decoration: BoxDecoration(
+                          color: whiteColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: SvgPicture.asset(
+                          'assets/vectors/more_icon.svg',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Column _listCards(MainhomeState state) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(top: 30, left: 25, bottom: 15),
+          child: Text(
+            "My Tasks",
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: fontWeightMedium,
+            ),
+          ),
+        ),
+        SizedBox(
+            height: 200,
+            child: ListView.builder(
+              itemCount: state.listCard.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                CardEntity item = state.listCard[index];
+                return Container(
+                  width: 150,
+                  height: 200,
+                  margin: const EdgeInsets.only(left: 20),
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: blueColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 50),
+                      Container(
+                        height: 36,
+                        width: 36,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: whiteColor20,
+                        ),
+                        child: SvgPicture.asset(
+                            item.iconPath ?? "assets/vectors/smartphone.svg"),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        "${item.numTask} Tasks",
+                        style: const TextStyle(
+                          color: whiteColor,
+                          fontSize: 10,
+                          fontWeight: fontWeightMedium,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        "${item.name}",
+                        style: const TextStyle(
+                          color: whiteColor,
+                          fontSize: 15,
+                          fontWeight: fontWeightMedium,
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ))
+      ],
+    );
+  }
+
+  Container _welcomeMessage() {
+    return Container(
+      margin: const EdgeInsets.only(top: 30, left: 25, right: 25),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          RichText(
+            text: const TextSpan(
+              style: TextStyle(
+                color: blackColor,
+                fontWeight: fontWeightMedium,
+              ),
+              children: <TextSpan>[
+                TextSpan(
+                  text: 'Hello, ',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: blackColor,
+                  ),
+                ),
+                TextSpan(
+                  text: 'Jessie',
+                  style: TextStyle(
+                    color: mainColor,
+                    fontSize: 15,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Text(
+            "Complete your taks today",
+            style: TextStyle(
+                fontFamily: mainFontFamily,
+                fontSize: 20,
+                fontWeight: fontWeightMedium),
+          )
+        ],
+      ),
+    );
+  }
+
+  Container _searchInput() {
+    return Container(
+      margin: const EdgeInsets.only(top: 30, left: 25, right: 25),
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+            color: const Color(0xff1D1617).withOpacity(0.11),
+            blurRadius: 40,
+            spreadRadius: 0.0)
+      ]),
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: "Search Your Task",
+          filled: true,
+          fillColor: whiteColor,
+          contentPadding: const EdgeInsets.all(15),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide.none,
+          ),
+          prefixIcon: Padding(
+            padding: const EdgeInsets.all(12),
+            child: SvgPicture.asset("assets/vectors/search_icon.svg"),
+          ),
+        ),
+      ),
+    );
+  }
+
+  AppBar _homeAppBar() {
+    return AppBar(
+      backgroundColor: whiteColor,
+      elevation: 0.0,
+      leading: GestureDetector(
+        onTap: null,
+        child: Container(
+          width: 46,
+          height: 46,
+          padding: const EdgeInsets.all(10),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: whiteColor,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: SvgPicture.asset('assets/vectors/menu.svg'),
+        ),
+      ),
+      actions: [
+        GestureDetector(
+          onTap: null,
+          child: Container(
+            width: 46,
+            height: 46,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: whiteColor,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: SvgPicture.asset('assets/vectors/bell_icon.svg'),
+          ),
+        ),
+        const SizedBox(width: 10),
+        GestureDetector(
+          onTap: null,
+          child: Container(
+            width: 46,
+            height: 46,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: whiteColor,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Image.asset("assets/images/avatar.png"),
+          ),
+        ),
+        const SizedBox(width: 20),
+      ],
     );
   }
 }
