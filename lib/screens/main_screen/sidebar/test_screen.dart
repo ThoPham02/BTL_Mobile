@@ -22,7 +22,7 @@ class _TestScreenState extends State<TestScreen> {
       duration: const Duration(milliseconds: 250),
       decoration: BoxDecoration(
         color: Colors.orange,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(isDrawerOpen ? 20 : 0),
       ),
       child: Column(
         children: [

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:task_management/constants/style.dart';
-import 'package:task_management/screens/login_signup/forgotPassword/forgotPassword1.dart';
-import 'package:task_management/screens/login_signup/forgotPassword/forgotPassword2.dart';
-import 'package:task_management/screens/login_signup/forgotPassword/forgotPassword3.dart';
+import 'package:task_management/screens/login_signup/forgot_password/forgot_password1.dart';
+import 'package:task_management/screens/login_signup/forgot_password/forgot_password2.dart';
+import 'package:task_management/screens/login_signup/forgot_password/forgot_password3.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);

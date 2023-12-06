@@ -1,16 +1,28 @@
+// ignore_for_file: use_build_context_synchronously, avoid_print
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:task_management/constants/style.dart';
-import 'package:task_management/screens/login_signup/forgotPassword/forgotPassword.dart';
+import 'package:task_management/screens/login_signup/forgot_password/forgot_password.dart';
 import 'package:task_management/screens/login_signup/input_ps/Input_ps.dart';
+import 'package:task_management/services/firebase_auth_service.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   final void Function()? onTap;
 
-  LoginScreen({super.key, required this.onTap});
+  const LoginScreen({super.key, this.onTap});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
 
   final ValueNotifier<bool> isPasswordVisibleNotifier =
       ValueNotifier<bool>(false);
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +98,7 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                 ),
                                 GestureDetector(
-                                  onTap: onTap,
+                                  onTap: widget.onTap,
                                   child: Container(
                                     margin: EdgeInsets.fromLTRB(
                                         0 * fem, 1 * fem, 0 * fem, 0 * fem),
@@ -172,6 +184,7 @@ class LoginScreen extends StatelessWidget {
                                 ],
                               ),
                               child: TextField(
+                                controller: _emailController,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Enter your username or E-mail",
@@ -224,8 +237,10 @@ class LoginScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            child:
-                                const InputPS(hintText: 'Enter your password'),
+                            child: InputPS(
+                              hintText: 'Enter your password',
+                              controller: _passwordController,
+                            ),
                           ),
                         ],
                       ),
@@ -248,7 +263,8 @@ class LoginScreen extends StatelessWidget {
                         ],
                       ),
                       child: Center(
-                        child: Center(
+                        child: TextButton(
+                          onPressed: _loginHandle,
                           child: Text(
                             'Login',
                             textAlign: TextAlign.center,
@@ -369,5 +385,17 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _loginHandle() async {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.signIn(email, password);
+
+    if (user != null) {
+      print(user.uid);
+      Navigator.pushNamed(context, "/mainhome");
+    }
   }
 }
