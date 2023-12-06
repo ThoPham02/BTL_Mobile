@@ -3,8 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:task_management/models/user_entity.dart';
 
 class FireStorageService {
-  final CollectionReference _usersCollectionReference =
-      FirebaseFirestore.instance.collection('user');
+  final String userCollection;
+
+  FireStorageService({required this.userCollection});
+
+  late final CollectionReference _usersCollectionReference =
+      FirebaseFirestore.instance.collection(userCollection);
 
   Future<UserEntity?> createUser(UserEntity user) async {
     try {
