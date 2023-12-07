@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,5 +41,11 @@ class MainhomeCubit extends Cubit<MainhomeState> {
       TaskEntity(name: "Mobile App Design", timeEnd: 2, timeStart: 1),
       TaskEntity(name: "Mobile App Design", timeEnd: 2, timeStart: 1),
     ]));
+  }
+
+  Future testFirebase() async {
+    await FirebaseFirestore.instance
+        .collection("task_db")
+        .add({"name": "ThoPB"});
   }
 }

@@ -24,26 +24,21 @@ class FireStorageService {
     return null;
   }
 
-  // Future<UserEntity?> getUser({String? uid}) async {
-  //   try {
-  //     DocumentSnapshot<Object?> userData;
-  //     if (uid != null) {
-  //       userData = await _usersCollectionReference.doc(uid).get();
-  //     } else {
-  //       final id = GlobalData.instance.accountEntity?.id;
-  //       userData = await _usersCollectionReference.doc(id).get();
-  //     }
+  Future<UserEntity?> getUser(String? uid) async {
+    try {
+      DocumentSnapshot<Object?> userData;
 
-  //     var user = userData.data();
+      userData = await _usersCollectionReference.doc(uid).get();
+      // var user = userData.data();
 
-  //     return UserEntity.fromJson(userData.data() as Map<String, dynamic>);
-  //   } catch (e) {
-  //     if (e is PlatformException) {
-  //       return null;
-  //     }
-  //     return null;
-  //   }
-  // }
+      return UserEntity.fromJson(userData.data() as Map<String, dynamic>);
+    } catch (e) {
+      if (e is PlatformException) {
+        return null;
+      }
+      return null;
+    }
+  }
 
   // Future<UserEntity?> updateUser(UserEntity accountEntity) async {
   //   try {
