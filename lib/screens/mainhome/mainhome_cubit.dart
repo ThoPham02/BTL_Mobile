@@ -16,6 +16,10 @@ class MainhomeCubit extends Cubit<MainhomeState> {
     emit(state.copyWith(searchInput: text));
   }
 
+  changeCurrentTab(String userID, String? cardID) {
+    
+  }
+
   void changeTab(bool isTab) {
     emit(state.copyWith(
       isProgress: isTab,
