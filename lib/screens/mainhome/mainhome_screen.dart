@@ -278,48 +278,51 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 CardEntity item = state.listCard[index];
-                return Container(
-                  width: 150,
-                  height: 200,
-                  margin: const EdgeInsets.only(left: 20),
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: blueColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Expanded(child: SizedBox()),
-                      Container(
-                        height: 36,
-                        width: 36,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: whiteColor20,
+                return GestureDetector(
+                  onTap: _cubit.changeCurrentTab(userInfo.userID ?? "" ,item.cardID),
+                  child: Container(
+                    width: 150,
+                    height: 200,
+                    margin: const EdgeInsets.only(left: 20),
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: blueColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Expanded(child: SizedBox()),
+                        Container(
+                          height: 36,
+                          width: 36,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: whiteColor20,
+                          ),
+                          child: SvgPicture.asset(
+                              item.iconPath ?? "assets/vectors/smartphone.svg"),
                         ),
-                        child: SvgPicture.asset(
-                            item.iconPath ?? "assets/vectors/smartphone.svg"),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        "${item.numTask} Tasks",
-                        style: const TextStyle(
-                          color: whiteColor,
-                          fontSize: 10,
-                          fontWeight: fontWeightMedium,
+                        const SizedBox(height: 5),
+                        Text(
+                          "${item.numTask} Tasks",
+                          style: const TextStyle(
+                            color: whiteColor,
+                            fontSize: 10,
+                            fontWeight: fontWeightMedium,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        "${item.name}",
-                        style: const TextStyle(
-                          color: whiteColor,
-                          fontSize: 15,
-                          fontWeight: fontWeightMedium,
-                        ),
-                      )
-                    ],
+                        const SizedBox(height: 5),
+                        Text(
+                          "${item.name}",
+                          style: const TextStyle(
+                            color: whiteColor,
+                            fontSize: 15,
+                            fontWeight: fontWeightMedium,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 );
               },

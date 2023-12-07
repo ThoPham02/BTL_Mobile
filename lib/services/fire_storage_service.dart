@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:task_management/constants/global_variables.dart';
 import 'package:task_management/models/card_entity.dart';
+import 'package:task_management/models/task_entity.dart';
 import 'package:task_management/models/user_entity.dart';
 
 class FireStorageService {
@@ -87,5 +88,68 @@ class FireStorageService {
       }
     }
     return listCard;
+  }
+
+  // Task Store
+  Future<TaskEntity?> createTask(
+      String userID, String cardID, TaskEntity task) async {
+    await FirebaseFirestore.instance
+        .collection(
+            "$DB_COLLECTION/$userID/$CARD_COLLECTION/$cardID/$TASK_COLLECTION")
+        .doc(task.taskID)
+        .set(task.toJson());
+
+    return task;
+  }
+
+  Future<TaskEntity?> getTask(
+      String userID, String cardID, String taskID) async {
+    DocumentSnapshot<Object?> taskData = await FirebaseFirestore.instance
+        .collection(
+            "$DB_COLLECTION/$userID/$CARD_COLLECTION/$cardID/$TASK_COLLECTION")
+        .doc(taskID)
+        .get();
+
+    return TaskEntity.fromJson(taskData.data() as Map<String, dynamic>);
+  }
+
+  Future<TaskEntity?> updateTask(
+      String userID, String cardID, TaskEntity task) async {
+    await FirebaseFirestore.instance
+        .collection(
+            "$DB_COLLECTION/$userID/$CARD_COLLECTION/$cardID/$TASK_COLLECTION")
+        .doc(task.taskID)
+        .update(task.toJson());
+
+    return task;
+  }
+
+  Future deleteTask(String userID, String cardID, String taskID) async {
+    await FirebaseFirestore.instance
+        .collection(
+            "$DB_COLLECTION/$userID/$CARD_COLLECTION/$cardID/$TASK_COLLECTION")
+        .doc(cardID)
+        .delete();
+  }
+
+  Future<List<TaskEntity>?> listTask(String userID, String cardID) async {
+    List<TaskEntity> listTask = [];
+
+    Iterable<TaskEntity> tasks = await FirebaseFirestore.instance
+        .collection(
+            "$DB_COLLECTION/$userID/$CARD_COLLECTION/$cardID/$TASK_COLLECTION")
+        .get()
+        .then(
+          (value) => value.docs.map(
+            (e) => TaskEntity.fromJson(
+              e.data(),
+            ),
+          ),
+        );
+
+    for (var task in tasks) {
+      listTask.add(task);
+    }
+    return listTask;
   }
 }
