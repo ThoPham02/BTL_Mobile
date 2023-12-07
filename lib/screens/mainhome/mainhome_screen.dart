@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -53,15 +54,80 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
               _listTask(state),
             ],
           ),
-
-          // Bottom Nav
-          // bottomNavigationBar: BottomNavigationBar(items: const [
-          //   BottomNavigationBarItem(icon: searchIcon),
-          //   BottomNavigationBarItem(icon: searchIcon),
-          //   BottomNavigationBarItem(icon: searchIcon),
-          // ]),
+          bottomNavigationBar: _mainBottomNavigationBar(),
         );
       }),
+    );
+  }
+
+  BottomNavigationBar _mainBottomNavigationBar() {
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      onTap: (index) {},
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      items: [
+        BottomNavigationBarItem(
+          label: "",
+          icon: Center(
+            child: Container(
+              width: 46,
+              height: 46,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: whiteColor20,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: SvgPicture.asset("assets/vectors/home_icon.svg"),
+            ),
+          ),
+        ),
+        BottomNavigationBarItem(
+          label: "",
+          icon: Center(
+            child: Container(
+              width: 46,
+              height: 46,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: whiteColor20,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: SvgPicture.asset("assets/vectors/activity_icon.svg"),
+            ),
+          ),
+        ),
+        BottomNavigationBarItem(
+          label: "",
+          icon: Center(
+            child: Container(
+              width: 46,
+              height: 46,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: whiteColor20,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: SvgPicture.asset("assets/vectors/user_icon.svg"),
+            ),
+          ),
+        ),
+        BottomNavigationBarItem(
+          label: "",
+          icon: Center(
+            child: Container(
+              width: 46,
+              height: 46,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: mainColor,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: SvgPicture.asset("assets/vectors/plus_icon.svg"),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -118,7 +184,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
           ),
         ),
         SizedBox(
-          height: 400,
+          height: 250,
           child: ListView.builder(
             itemCount: state.listCard.length,
             scrollDirection: Axis.vertical,
@@ -214,7 +280,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 50),
+                      const Expanded(child: SizedBox()),
                       Container(
                         height: 36,
                         width: 36,
@@ -328,7 +394,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
       backgroundColor: whiteColor,
       elevation: 0.0,
       leading: GestureDetector(
-        onTap: null,
+        onTap: _testFirebase,
         child: Container(
           width: 46,
           height: 46,
@@ -372,5 +438,11 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
         const SizedBox(width: 20),
       ],
     );
+  }
+
+  _testFirebase() async {
+    await FirebaseFirestore.instance
+        .collection("task_db")
+        .add({"name": "ThoPB"});
   }
 }
