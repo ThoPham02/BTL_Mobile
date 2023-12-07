@@ -7,6 +7,8 @@ class TaskEntity {
   @JsonKey()
   final String? taskID;
   final String? name;
+  final String? cardName;
+  final int? status;
   final int? timeStart;
   final int? timeEnd;
   final String? description;
@@ -15,6 +17,8 @@ class TaskEntity {
   TaskEntity({
     this.taskID,
     this.name,
+    this.cardName,
+    this.status,
     this.timeStart,
     this.timeEnd,
     this.description,
