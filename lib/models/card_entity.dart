@@ -5,7 +5,7 @@ part 'card_entity.g.dart';
 @JsonSerializable()
 class CardEntity {
   @JsonKey()
-  final int? cardID;
+  final String? cardID;
   final String? name;
   final String? iconPath;
   final String? bgPath;
@@ -29,7 +29,7 @@ class CardEntity {
     List<CardEntity> cards = [];
 
     cards.add(CardEntity(
-      cardID: 1,
+      cardID: "1",
       name: "Mobile App Design",
       iconPath: "assets/vectors/smartphone.svg",
       bgPath: "assets/vectors/card_background1.svg",
@@ -38,7 +38,7 @@ class CardEntity {
     ));
 
     cards.add(CardEntity(
-      cardID: 1,
+      cardID: "2",
       name: "Meeting With Team",
       iconPath: "assets/vectors/monitor.svg",
       bgPath: "assets/vectors/card_background2.svg",
@@ -47,7 +47,7 @@ class CardEntity {
     ));
 
     cards.add(CardEntity(
-      cardID: 1,
+      cardID: "3",
       name: "Mobile App Design",
       iconPath: "assets/vectors/smartphone.svg",
       bgPath: "assets/vectors/card_background1.svg",
