@@ -5,10 +5,10 @@ import 'package:task_management/screens/onboarding/slash_screen.dart';
 import 'package:task_management/screens/task/task_screen.dart';
 
 final routes = {
-  "/": (context) => const MainhomeScreen(),
+  "/": (context) => MainhomeScreen(),
   "/example": (context) => const HomeScreen2(),
   "/slash": (context) => const SlashScreen(),
-  "/mainhome": (context) => const MainhomeScreen(),
+  "/mainhome": (context) => MainhomeScreen(),
   "/onboarding": (context) => const Onboard(),
   "/task": (context) => const TaskScreen(),
 };

@@ -1,52 +1,91 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/services.dart';
+import 'package:task_management/constants/global_variables.dart';
+import 'package:task_management/models/card_entity.dart';
 import 'package:task_management/models/user_entity.dart';
 
 class FireStorageService {
-  final String userCollection;
-
-  FireStorageService({required this.userCollection});
-
-  late final CollectionReference _usersCollectionReference =
-      FirebaseFirestore.instance.collection(userCollection);
-
+  // User Store
   Future<UserEntity?> createUser(UserEntity user) async {
-    try {
-      await _usersCollectionReference
-          .doc(user.userID.toString())
-          .set(user.toJson());
-    } catch (e) {
-      if (e is PlatformException) {
-        return null;
-      }
-      return null;
-    }
-    return null;
+    await FirebaseFirestore.instance
+        .collection(DB_COLLECTION)
+        .doc(user.userID)
+        .set(user.toJson());
+
+    return user;
   }
 
-  Future<UserEntity?> getUser(String? uid) async {
-    try {
-      DocumentSnapshot<Object?> userData;
+  Future<UserEntity?> getUser(String? userID) async {
+    DocumentSnapshot<Object?> userData = await FirebaseFirestore.instance
+        .collection(DB_COLLECTION)
+        .doc(userID)
+        .get();
 
-      userData = await _usersCollectionReference.doc(uid).get();
-      // var user = userData.data();
-
-      return UserEntity.fromJson(userData.data() as Map<String, dynamic>);
-    } catch (e) {
-      if (e is PlatformException) {
-        return null;
-      }
-      return null;
-    }
+    return UserEntity.fromJson(userData.data() as Map<String, dynamic>);
   }
 
-  // Future<UserEntity?> updateUser(UserEntity accountEntity) async {
-  //   try {
-  //     final id = GlobalData.instance.accountEntity?.id;
-  //     await _usersCollectionReference.doc(id).update(accountEntity.toJson());
-  //   } catch (e) {
-  //     print("$e");
-  //   }
-  //   return null;
-  // }
+  Future<UserEntity?> updateUser(UserEntity user) async {
+    await FirebaseFirestore.instance
+        .collection(DB_COLLECTION)
+        .doc(user.userID)
+        .update(user.toJson());
+
+    return user;
+  }
+
+  // Card Store
+  Future<CardEntity?> createCard(String userID, CardEntity card) async {
+    await FirebaseFirestore.instance
+        .collection("$DB_COLLECTION/$userID/$CARD_COLLECTION")
+        .doc(card.cardID)
+        .set(card.toJson());
+
+    return card;
+  }
+
+  Future<CardEntity?> getCard(String userID, String cardID) async {
+    DocumentSnapshot<Object?> cardData = await FirebaseFirestore.instance
+        .collection("$DB_COLLECTION/$userID/$CARD_COLLECTION")
+        .doc(cardID)
+        .get();
+
+    return CardEntity.fromJson(cardData.data() as Map<String, dynamic>);
+  }
+
+  Future<CardEntity?> updateCard(String userID, CardEntity card) async {
+    await FirebaseFirestore.instance
+        .collection("$DB_COLLECTION/$userID/$CARD_COLLECTION")
+        .doc(card.cardID)
+        .update(card.toJson());
+
+    return card;
+  }
+
+  Future deleteCard(String userID, String cardID) async {
+    await FirebaseFirestore.instance
+        .collection("$DB_COLLECTION/$userID/$CARD_COLLECTION")
+        .doc(cardID)
+        .delete();
+  }
+
+  Future<List<CardEntity>?> listCard(String userID, String searchStr) async {
+    List<CardEntity> listCard = [];
+
+    Iterable<CardEntity> cards = await FirebaseFirestore.instance
+        .collection("$DB_COLLECTION/$userID/$CARD_COLLECTION")
+        .get()
+        .then(
+          (value) => value.docs.map(
+            (e) => CardEntity.fromJson(
+              e.data(),
+            ),
+          ),
+        );
+
+    for (var card in cards) {
+      if (searchStr == "" || card.name?.contains(searchStr) == true) {
+        listCard.add(card);
+      }
+    }
+    return listCard;
+  }
 }

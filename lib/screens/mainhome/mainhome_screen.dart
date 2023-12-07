@@ -1,10 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:task_management/constants/style.dart';
 import 'package:task_management/models/card_entity.dart';
+import 'package:task_management/models/user_entity.dart';
 import 'package:task_management/screens/mainhome/mainhome_cubit.dart';
 
 class MainhomeScreen extends StatefulWidget {
@@ -18,16 +18,26 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
   final PageController controller = PageController();
   late final MainhomeCubit _cubit;
 
+  final UserEntity userInfo = UserEntity(
+    email: "tholgbg2002@gmail.com",
+    name: "Tho test firebase",
+    password: "",
+    userID: "123456",
+  );
+
+  final TextEditingController _searchController = TextEditingController();
+
   @override
   void initState() {
     _cubit = MainhomeCubit();
-    _cubit.addCard();
+    _cubit.filterCard(userInfo.userID ?? "", "");
     super.initState();
   }
 
   @override
   void dispose() {
     controller.dispose();
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -326,13 +336,13 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           RichText(
-            text: const TextSpan(
-              style: TextStyle(
+            text: TextSpan(
+              style: const TextStyle(
                 color: blackColor,
                 fontWeight: fontWeightMedium,
               ),
               children: <TextSpan>[
-                TextSpan(
+                const TextSpan(
                   text: 'Hello, ',
                   style: TextStyle(
                     fontSize: 15,
@@ -340,8 +350,8 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
                   ),
                 ),
                 TextSpan(
-                  text: 'Jessie',
-                  style: TextStyle(
+                  text: '${userInfo.name}',
+                  style: const TextStyle(
                     color: mainColor,
                     fontSize: 15,
                   ),
@@ -371,6 +381,10 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
             spreadRadius: 0.0)
       ]),
       child: TextField(
+        controller: _searchController,
+        onChanged: (text) {
+          _cubit.filterCard(userInfo.userID ?? "", text);
+        },
         decoration: InputDecoration(
           hintText: "Search Your Task",
           filled: true,
@@ -394,7 +408,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
       backgroundColor: whiteColor,
       elevation: 0.0,
       leading: GestureDetector(
-        onTap: _testFirebase,
+        onTap: _cubit.testFirebase,
         child: Container(
           width: 46,
           height: 46,
@@ -438,11 +452,5 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
         const SizedBox(width: 20),
       ],
     );
-  }
-
-  _testFirebase() async {
-    await FirebaseFirestore.instance
-        .collection("task_db")
-        .add({"name": "ThoPB"});
   }
 }

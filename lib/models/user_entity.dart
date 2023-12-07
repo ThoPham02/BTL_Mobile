@@ -5,10 +5,10 @@ part 'user_entity.g.dart';
 @JsonSerializable()
 class UserEntity {
   @JsonKey()
-  final int? userID;
-  final String? name;
-  final String? email;
-  final String? password;
+  String? userID;
+  String? name;
+  String? email;
+  String? password;
 
   UserEntity({this.userID, this.name, this.email, this.password});
 

@@ -5,9 +5,8 @@ part 'task_entity.g.dart';
 @JsonSerializable()
 class TaskEntity {
   @JsonKey()
-  final int? taskID;
+  final String? taskID;
   final String? name;
-  final int? cardID;
   final int? timeStart;
   final int? timeEnd;
   final String? description;
@@ -16,7 +15,6 @@ class TaskEntity {
   TaskEntity({
     this.taskID,
     this.name,
-    this.cardID,
     this.timeStart,
     this.timeEnd,
     this.description,
