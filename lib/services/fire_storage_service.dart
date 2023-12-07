@@ -132,7 +132,7 @@ class FireStorageService {
         .delete();
   }
 
-  Future<List<TaskEntity>?> listTask(String userID, String cardID) async {
+  Future<List<TaskEntity>?> listTask(String? userID, String cardID) async {
     List<TaskEntity> listTask = [];
 
     Iterable<TaskEntity> tasks = await FirebaseFirestore.instance

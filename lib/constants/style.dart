@@ -15,6 +15,8 @@ const whiteColor20 = Color.fromRGBO(255, 255, 255, 0.2);
 const blueColor = Color.fromRGBO(84, 134, 233, 1);
 const blueColor20 = Color.fromRGBO(84, 134, 233, 0.2);
 
+const redColor = Color.fromRGBO(237, 145, 142, 1);
+
 const greyColor = Color(0x00dadada);
 
 // font

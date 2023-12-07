@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 
 import 'package:task_management/constants/style.dart';
 import 'package:task_management/models/card_entity.dart';
+import 'package:task_management/models/task_entity.dart';
 import 'package:task_management/models/user_entity.dart';
 import 'package:task_management/screens/mainhome/mainhome_cubit.dart';
 
@@ -18,7 +19,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
   final PageController controller = PageController();
   late final MainhomeCubit _cubit;
 
-  final UserEntity userInfo = UserEntity(
+  final UserEntity _userInfo = UserEntity(
     email: "tholgbg2002@gmail.com",
     name: "Tho test firebase",
     password: "",
@@ -30,7 +31,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
   @override
   void initState() {
     _cubit = MainhomeCubit();
-    _cubit.filterCard(userInfo.userID ?? "", "");
+    _cubit.filterCard(_userInfo.userID ?? "", "");
     super.initState();
   }
 
@@ -49,9 +50,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
       },
       child: BlocBuilder<MainhomeCubit, MainhomeState>(
           buildWhen: (previous, current) {
-        return previous.listCard != current.listCard ||
-            previous.listTask != current.listTask ||
-            previous.isProgress != current.isProgress;
+        return previous != current;
       }, builder: (context, state) {
         return Scaffold(
           appBar: _homeAppBar(),
@@ -156,13 +155,12 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
                   textStyle: const TextStyle(fontSize: 23),
                 ),
                 onPressed: () {
-                  _cubit.changeTab(true);
-                  _cubit.addCard();
+                  _cubit.changeTab(2);
                 },
                 child: Text(
                   'In Progress',
                   style: TextStyle(
-                    color: state.isProgress ? blackColor : blackColor50,
+                    color: state.isProgress == 2 ? blackColor : blackColor50,
                     fontSize: fontSizeMedium,
                     fontWeight: fontWeightMedium,
                   ),
@@ -170,11 +168,13 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
               ),
               const SizedBox(width: 16.0),
               TextButton(
-                onPressed: () => {_cubit.changeTab(false), _cubit.addTask()},
+                onPressed: () => {
+                  _cubit.changeTab(1),
+                },
                 child: Text(
                   'Complete',
                   style: TextStyle(
-                    color: state.isProgress ? blackColor50 : blackColor,
+                    color: state.isProgress == 2 ? blackColor50 : blackColor,
                     fontSize: fontSizeMedium,
                     fontWeight: fontWeightMedium,
                   ),
@@ -188,72 +188,97 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
           child: Container(
             width: 60,
             height: 3,
-            margin:
-                EdgeInsets.only(left: state.isProgress ? 30 : 160, bottom: 15),
+            margin: EdgeInsets.only(
+                left: state.isProgress == 2 ? 30 : 160, bottom: 15),
             color: mainColor,
           ),
         ),
         SizedBox(
-          height: 250,
+          height: 225,
           child: ListView.builder(
-            itemCount: state.listCard.length,
+            itemCount: state.listTask.length,
             scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {
-              CardEntity item = state.listCard[index];
-              return Container(
-                height: 75,
-                padding: const EdgeInsets.only(
-                  left: 40,
-                  right: 35,
-                  top: 10,
-                  bottom: 10,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "${item.name}",
-                          style: const TextStyle(
-                            fontWeight: fontWeightMedium,
-                            fontSize: 15,
-                            color: blackColor,
-                          ),
-                        ),
-                        Text(
-                          "${item.name}",
-                          style: const TextStyle(
-                            fontWeight: fontWeightRegular,
-                            fontSize: 13,
-                            color: blackColor50,
-                          ),
-                        ),
-                      ],
-                    ),
-                    GestureDetector(
-                      onTap: null,
-                      child: Container(
-                        width: 36,
-                        height: 36,
-                        decoration: BoxDecoration(
-                          color: whiteColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: SvgPicture.asset(
-                          'assets/vectors/more_icon.svg',
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
+              TaskEntity item = state.listTask[index];
+              if (item.status == state.isProgress) {
+                return const SizedBox();
+              }
+              return _taskWidget(state, item);
             },
           ),
         ),
       ],
+    );
+  }
+
+  Container _taskWidget(MainhomeState state, TaskEntity item) {
+    return Container(
+      height: 75,
+      padding: const EdgeInsets.only(
+        left: 40,
+        right: 35,
+        top: 10,
+        bottom: 10,
+      ),
+      child: Row(
+        children: [
+          state.isProgress == 1
+              ? SvgPicture.asset("assets/vectors/completed.svg")
+              : Stack(
+                  children: [
+                    const SizedBox(width: 16),
+                    Container(
+                      width: 4,
+                      height: 50,
+                      color: blueColor20,
+                    ),
+                    Container(
+                      width: 4,
+                      height: 35,
+                      color: blueColor,
+                    )
+                  ],
+                ),
+          const SizedBox(width: 10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "${item.name}",
+                style: const TextStyle(
+                  fontWeight: fontWeightMedium,
+                  fontSize: 15,
+                  color: blackColor,
+                ),
+              ),
+              Text(
+                "${item.cardName}",
+                style: const TextStyle(
+                  fontWeight: fontWeightRegular,
+                  fontSize: 13,
+                  color: blackColor50,
+                ),
+              ),
+            ],
+          ),
+          const Expanded(child: SizedBox()),
+          GestureDetector(
+            onTap: null,
+            child: Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                color: whiteColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: SvgPicture.asset(
+                'assets/vectors/more_icon.svg',
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -278,56 +303,62 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 CardEntity item = state.listCard[index];
-                return GestureDetector(
-                  onTap: _cubit.changeCurrentTab(userInfo.userID ?? "" ,item.cardID),
-                  child: Container(
-                    width: 150,
-                    height: 200,
-                    margin: const EdgeInsets.only(left: 20),
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: blueColor,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Expanded(child: SizedBox()),
-                        Container(
-                          height: 36,
-                          width: 36,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: whiteColor20,
-                          ),
-                          child: SvgPicture.asset(
-                              item.iconPath ?? "assets/vectors/smartphone.svg"),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          "${item.numTask} Tasks",
-                          style: const TextStyle(
-                            color: whiteColor,
-                            fontSize: 10,
-                            fontWeight: fontWeightMedium,
-                          ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          "${item.name}",
-                          style: const TextStyle(
-                            color: whiteColor,
-                            fontSize: 15,
-                            fontWeight: fontWeightMedium,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                );
+                return _cardWidget(state.currentCard, item);
               },
             ))
       ],
+    );
+  }
+
+  GestureDetector _cardWidget(String currentCard, CardEntity item) {
+    return GestureDetector(
+      onTap: () {
+        _cubit.changeCurrentTab(_userInfo.userID, item.cardID);
+      },
+      child: Container(
+        width: 150,
+        height: 200,
+        margin: const EdgeInsets.only(left: 20),
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: currentCard == item.cardID ? redColor : blueColor,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Expanded(child: SizedBox()),
+            Container(
+              height: 36,
+              width: 36,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: whiteColor20,
+              ),
+              child: SvgPicture.asset(
+                  item.iconPath ?? "assets/vectors/smartphone.svg"),
+            ),
+            const SizedBox(height: 5),
+            Text(
+              "${item.numTask} Tasks",
+              style: const TextStyle(
+                color: whiteColor,
+                fontSize: 10,
+                fontWeight: fontWeightMedium,
+              ),
+            ),
+            const SizedBox(height: 5),
+            Text(
+              "${item.name}",
+              style: const TextStyle(
+                color: whiteColor,
+                fontSize: 15,
+                fontWeight: fontWeightMedium,
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 
@@ -353,7 +384,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
                   ),
                 ),
                 TextSpan(
-                  text: '${userInfo.name}',
+                  text: '${_userInfo.name}',
                   style: const TextStyle(
                     color: mainColor,
                     fontSize: 15,
@@ -386,7 +417,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
       child: TextField(
         controller: _searchController,
         onChanged: (text) {
-          _cubit.filterCard(userInfo.userID ?? "", text);
+          _cubit.filterCard(_userInfo.userID ?? "", text);
         },
         decoration: InputDecoration(
           hintText: "Search Your Task",
@@ -411,7 +442,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
       backgroundColor: whiteColor,
       elevation: 0.0,
       leading: GestureDetector(
-        onTap: _cubit.testFirebase,
+        onTap: null,
         child: Container(
           width: 46,
           height: 46,
