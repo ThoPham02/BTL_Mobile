@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_management/models/user_entity.dart';
 import 'package:task_management/screens/main_screen/drawer/drawer_screen.dart';
 import 'package:task_management/screens/main_screen/mainhome/mainhome_screen.dart';
 
@@ -17,6 +18,11 @@ class _MainControllerState extends State<MainController> {
 
   @override
   Widget build(BuildContext context) {
+    final UserEntity user =
+        ModalRoute.of(context)?.settings.arguments as UserEntity;
+    if (user.userID == "") {
+      Navigator.pushNamed(context, "auth");
+    }
     return Scaffold(
       body: Stack(
         children: [

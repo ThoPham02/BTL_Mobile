@@ -20,6 +20,9 @@ class FireStorageService {
         .collection(DB_COLLECTION)
         .doc(userID)
         .get();
+    if (userData.data() == null) {
+      return null;
+    }
 
     return UserEntity.fromJson(userData.data() as Map<String, dynamic>);
   }
@@ -48,6 +51,9 @@ class FireStorageService {
         .collection("$DB_COLLECTION/$userID/$CARD_COLLECTION")
         .doc(cardID)
         .get();
+    if (cardData.data() == null) {
+      return null;
+    }
 
     return CardEntity.fromJson(cardData.data() as Map<String, dynamic>);
   }
