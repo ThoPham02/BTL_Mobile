@@ -56,7 +56,17 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               color: whiteColor,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Image.asset("assets/images/avatar.png"),
+            child: SizedBox(
+              width: 46,
+              height: 46,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset(
+                  "assets/images/avatar.jpg",
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
           ),
         ),
         const SizedBox(width: 20),

@@ -1,8 +1,11 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:task_management/constants/style.dart';
 import 'package:task_management/models/user_entity.dart';
+import 'package:task_management/screens/main_screen/user/user_detail.dart';
 import 'package:task_management/screens/main_screen/widgets/bottom_bar.dart';
 import 'package:task_management/screens/main_screen/widgets/user_category.dart';
 
@@ -21,14 +24,29 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
+  final PageController _controller = PageController();
+
   @override
   Widget build(BuildContext context) {
+    return PageView(
+      controller: _controller,
+      children: [
+        _userScreen(_controller),
+        UserDetail(
+          user: widget.userInfo,
+          pageController: _controller,
+        ),
+      ],
+    );
+  }
+
+  Scaffold _userScreen(PageController pageController) {
     return Scaffold(
       backgroundColor: blackColor5NoOpa,
       body: Column(
         children: [
           const SizedBox(height: 40),
-          _userHeader(),
+          _userHeader(pageController),
           const SizedBox(height: 10),
           Expanded(
             child: Container(
@@ -56,6 +74,7 @@ class _UserScreenState extends State<UserScreen> {
                         SvgPicture.asset("assets/vectors/user_icon.svg"),
                     title: "Manage Account",
                     subIcon: CupertinoIcons.chevron_right,
+                    controller: pageController,
                   ),
                   UserCategory(
                     color: yellowColor,
@@ -109,34 +128,74 @@ class _UserScreenState extends State<UserScreen> {
     );
   }
 
-  Container _userHeader() {
+  Container _userHeader(PageController pageController) {
     return Container(
       margin: const EdgeInsets.all(30),
       height: 85,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
+          SizedBox(
             width: 85,
             height: 85,
-            decoration: BoxDecoration(
+            child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.grey,
-            ),
-            clipBehavior: Clip.none,
-            child: Image.asset(
-              "assets/images/avatar.jpg",
-              fit: BoxFit.cover,
+              child: Image.asset(
+                "assets/images/avatar.jpg",
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           const SizedBox(width: 25),
-          Text(
-            "${widget.userInfo.name}",
-            style: const TextStyle(
-              fontSize: 21,
-              fontWeight: fontWeightMedium,
-              fontFamily: "Poppins",
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 200,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "${widget.userInfo.name}",
+                      style: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: fontWeightMedium,
+                        fontFamily: "Poppins",
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        pageController.jumpToPage(1);
+                      },
+                      child: const Icon(CupertinoIcons.chevron_right),
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              SizedBox(
+                width: 200,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SvgPicture.asset(
+                      "assets/vectors/vip_icon.svg",
+                      color: mainColor,
+                    ),
+                    const SizedBox(width: 10),
+                    const Text(
+                      "Vip User",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: fontWeightRegular,
+                          fontFamily: "Poppins",
+                          color: mainColor),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           )
         ],
       ),

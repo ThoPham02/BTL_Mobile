@@ -28,17 +28,23 @@ class _DrawerScreenState extends State<DrawerScreen> {
             },
             icon: SvgPicture.asset('assets/vectors/icon_back.svg'),
           ),
-          const Padding(
-            padding: EdgeInsets.only(top: 50, bottom: 30),
+          Padding(
+            padding: const EdgeInsets.only(top: 50, bottom: 30),
             child: Row(
               children: <Widget>[
-                CircleAvatar(
-                  radius: 30,
-                  backgroundImage: NetworkImage(
-                      'https://images.pexels.com/photos/2859616/pexels-photo-2859616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
+                SizedBox(
+                  width: 60,
+                  height: 60,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.asset(
+                      "assets/images/avatar.jpg",
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-                SizedBox(width: 10),
-                Expanded(
+                const SizedBox(width: 10),
+                const Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
