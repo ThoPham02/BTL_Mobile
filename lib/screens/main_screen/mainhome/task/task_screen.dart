@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_management/constants/icons.dart';
 import 'package:task_management/constants/style.dart';
 import 'package:task_management/models/task_entity.dart';
-import 'package:task_management/screens/main_screen/task/task_cubit.dart';
+import 'package:task_management/screens/main_screen/mainhome/task/task_cubit.dart';
 import 'package:task_management/widgets/time_line/list_time.dart';
 
 class TaskScreen extends StatefulWidget {

@@ -8,6 +8,7 @@ const blackColor50 = Color.fromRGBO(48, 48, 48, 0.5);
 const blackColor30 = Color.fromRGBO(48, 48, 48, 0.3);
 const blackColor60 = Color.fromRGBO(48, 48, 48, 0.6);
 const blackColor5 = Color.fromRGBO(48, 48, 48, 0.05);
+const blackColor5NoOpa = Color.fromRGBO(245, 245, 245, 1);
 
 const whiteColor = Color.fromRGBO(255, 255, 255, 1);
 const whiteColor60 = Color.fromRGBO(255, 255, 255, 0.6);
@@ -20,6 +21,12 @@ const redColor = Color.fromRGBO(237, 145, 142, 1);
 const redColor20 = Color.fromRGBO(237, 145, 142, 0.2);
 
 const greyColor = Color(0x00dadada);
+
+const greenColor = Color.fromRGBO(162, 240, 226, 1);
+
+const yellowColor = Color.fromRGBO(241, 238, 173, 1);
+
+const pupleColor = Color.fromRGBO(203, 173, 241, 1);
 
 // font
 const fontWeightMedium = FontWeight.w600;

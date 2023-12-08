@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:task_management/models/user_entity.dart';
 
 class DrawerScreen extends StatefulWidget {
-  const DrawerScreen({super.key});
+  const DrawerScreen(
+      {super.key, required this.userInfo, required this.setDrawState});
+
+  final UserEntity userInfo;
+  final Function setDrawState;
 
   @override
   State<DrawerScreen> createState() => _DrawerScreenState();
@@ -18,7 +23,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              widget.setDrawState();
+            },
             icon: SvgPicture.asset('assets/vectors/icon_back.svg'),
           ),
           const Padding(
