@@ -5,7 +5,9 @@ import 'package:task_management/screens/auth_screen/forgot_password/forgot_passw
 import 'package:task_management/screens/auth_screen/forgot_password/forgot_password_3.dart';
 
 class ForgotPasswordController extends StatefulWidget {
-  const ForgotPasswordController({super.key});
+  const ForgotPasswordController({super.key, required this.setForgotState});
+
+  final Function(bool) setForgotState;
 
   @override
   State<ForgotPasswordController> createState() =>
@@ -31,13 +33,27 @@ class _ForgotPasswordControllerState extends State<ForgotPasswordController> {
             physics: const NeverScrollableScrollPhysics(),
             controller: _controller,
             children: <Widget>[
-              ForgotPassword1(controller: _controller),
-              const ForgotPassword2(),
-              const ForgotPassword3(),
+              ForgotPassword1(
+                setForgotState: widget.setForgotState,
+                controller: _controller,
+                textController: TextEditingController(),
+              ),
+              ForgotPassword2(
+                setForgotState: widget.setForgotState,
+                controller: _controller,
+                textController: TextEditingController(),
+              ),
+              ForgotPassword3(
+                setForgotState: widget.setForgotState,
+                textController: TextEditingController(),
+                updatePassword: _updatePassword,
+              ),
             ],
           ),
         ),
       ),
     );
   }
+
+  _updatePassword() async {}
 }

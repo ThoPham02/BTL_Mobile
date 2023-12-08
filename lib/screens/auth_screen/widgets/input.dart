@@ -3,18 +3,21 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:task_management/constants/style.dart';
 
 class Input extends StatefulWidget {
-  const Input({
-    super.key,
-    this.title = "",
-    this.hintText = "",
-    required this.textController,
-    this.typePassword = false,
-  });
+  const Input(
+      {super.key,
+      this.title = "",
+      this.hintText = "",
+      required this.textController,
+      this.typePassword = false,
+      this.fillColor = whiteColor,
+      this.margin = true});
 
   final String title;
   final String hintText;
   final TextEditingController textController;
   final bool typePassword;
+  final Color fillColor;
+  final bool margin;
 
   @override
   State<Input> createState() => _InputState();
@@ -27,7 +30,9 @@ class _InputState extends State<Input> {
   Widget build(BuildContext context) {
     return Container(
       height: 100,
-      margin: const EdgeInsets.only(left: 25, right: 25, top: 30),
+      margin: widget.margin
+          ? const EdgeInsets.only(left: 25, right: 25, top: 30)
+          : const EdgeInsets.all(0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -51,7 +56,7 @@ class _InputState extends State<Input> {
                       color: blackColor50,
                     ),
                     filled: true,
-                    fillColor: whiteColor,
+                    fillColor: widget.fillColor,
                     contentPadding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
@@ -83,7 +88,7 @@ class _InputState extends State<Input> {
                       color: blackColor50,
                     ),
                     filled: true,
-                    fillColor: whiteColor,
+                    fillColor: widget.fillColor,
                     contentPadding: const EdgeInsets.all(15),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),

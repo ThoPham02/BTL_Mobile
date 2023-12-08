@@ -5,6 +5,7 @@ const mainColor = Color.fromRGBO(242, 105, 80, 1);
 
 const blackColor = Color.fromRGBO(48, 48, 48, 1);
 const blackColor50 = Color.fromRGBO(48, 48, 48, 0.5);
+const blackColor30 = Color.fromRGBO(48, 48, 48, 0.3);
 const blackColor60 = Color.fromRGBO(48, 48, 48, 0.6);
 const blackColor5 = Color.fromRGBO(48, 48, 48, 0.05);
 
