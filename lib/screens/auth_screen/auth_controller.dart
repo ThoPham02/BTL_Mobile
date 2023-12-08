@@ -38,7 +38,7 @@ class _AuthControllerState extends State<AuthController> {
               ],
             ),
             _forgotPassword
-                ? const ForgotPasswordController()
+                ? ForgotPasswordController(setForgotState: _setForgotPassword)
                 : const SizedBox(width: 0, height: 0),
           ],
         ));

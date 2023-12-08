@@ -25,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: blackColor5,
-      body: Column(
+      body: ListView(
         children: [
           AuthHeader(
             indexPage: 0,
@@ -99,42 +99,44 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
           const SizedBox(height: 20),
-          SizedBox(
-            width: 215,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: 50,
-                  height: 50,
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: whiteColor,
+          Center(
+            child: SizedBox(
+              width: 215,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 50,
+                    height: 50,
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: whiteColor,
+                    ),
+                    child: SvgPicture.asset("assets/vectors/google_icon.svg"),
                   ),
-                  child: SvgPicture.asset("assets/vectors/google_icon.svg"),
-                ),
-                Container(
-                  width: 50,
-                  height: 50,
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: redColor20,
+                  Container(
+                    width: 50,
+                    height: 50,
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: redColor20,
+                    ),
+                    child: SvgPicture.asset("assets/vectors/user.svg"),
                   ),
-                  child: SvgPicture.asset("assets/vectors/user.svg"),
-                ),
-                Container(
-                  width: 50,
-                  height: 50,
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: blueColor,
-                  ),
-                  child: SvgPicture.asset("assets/vectors/logo_facebook.svg"),
-                )
-              ],
+                  Container(
+                    width: 50,
+                    height: 50,
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: blueColor,
+                    ),
+                    child: SvgPicture.asset("assets/vectors/logo_facebook.svg"),
+                  )
+                ],
+              ),
             ),
           )
         ],

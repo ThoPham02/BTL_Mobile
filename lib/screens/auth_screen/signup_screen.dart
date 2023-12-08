@@ -25,7 +25,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: blackColor5,
-      body: Column(
+      body: ListView(
         children: [
           AuthHeader(
             indexPage: 1,
