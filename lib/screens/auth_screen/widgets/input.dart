@@ -3,14 +3,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:task_management/constants/style.dart';
 
 class Input extends StatefulWidget {
-  const Input(
-      {super.key,
-      this.title = "",
-      this.hintText = "",
-      required this.textController,
-      this.typePassword = false,
-      this.fillColor = whiteColor,
-      this.margin = true});
+  const Input({
+    super.key,
+    this.title = "",
+    this.hintText = "",
+    required this.textController,
+    this.typePassword = false,
+    this.fillColor = whiteColor,
+    this.margin = true,
+    this.enabled = true,
+  });
 
   final String title;
   final String hintText;
@@ -18,6 +20,7 @@ class Input extends StatefulWidget {
   final bool typePassword;
   final Color fillColor;
   final bool margin;
+  final bool enabled;
 
   @override
   State<Input> createState() => _InputState();
@@ -46,6 +49,7 @@ class _InputState extends State<Input> {
           const SizedBox(height: 10),
           widget.typePassword
               ? TextField(
+                  enabled: widget.enabled,
                   controller: widget.textController,
                   obscureText: hindenPassword,
                   decoration: InputDecoration(
@@ -79,6 +83,7 @@ class _InputState extends State<Input> {
                   ),
                 )
               : TextField(
+                  enabled: widget.enabled,
                   controller: widget.textController,
                   decoration: InputDecoration(
                     hintText: widget.hintText,

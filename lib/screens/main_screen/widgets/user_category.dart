@@ -24,7 +24,9 @@ class UserCategory extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 20),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          controller?.jumpToPage(1);
+        },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
