@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Task Management',
-      initialRoute: "/",
+      initialRoute: "",
       routes: routes,
       debugShowCheckedModeBanner: false,
     );

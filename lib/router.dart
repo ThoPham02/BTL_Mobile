@@ -1,14 +1,9 @@
-import 'package:task_management/screens/example/example_screen.dart';
-import 'package:task_management/screens/mainhome/mainhome_screen.dart';
-import 'package:task_management/screens/onboarding/onboard.dart';
-import 'package:task_management/screens/onboarding/slash_screen.dart';
-import 'package:task_management/screens/task/task_screen.dart';
+import 'package:task_management/screens/auth_screen/auth_controller.dart';
+import 'package:task_management/screens/main_screen/main_controller.dart';
+import 'package:task_management/screens/onboard_screen/onboard_controller.dart';
 
 final routes = {
-  "/": (context) => MainhomeScreen(),
-  "/example": (context) => const HomeScreen2(),
-  "/slash": (context) => const SlashScreen(),
-  "/mainhome": (context) => MainhomeScreen(),
-  "/onboarding": (context) => const Onboard(),
-  "/task": (context) => const TaskScreen(),
+  "": (context) => const OnboardController(),
+  "main": (context) => const MainController(),
+  "auth": (context) => const AuthController(),
 };
