@@ -1,7 +1,11 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:task_management/constants/style.dart';
+import 'package:task_management/models/user_entity.dart';
 import 'package:task_management/screens/auth_screen/widgets/auth_header.dart';
 import 'package:task_management/screens/auth_screen/widgets/input.dart';
+import 'package:task_management/services/firebase_auth_service.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({
@@ -16,6 +20,8 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final FirebaseAuthService _authService = FirebaseAuthService();
+
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -49,7 +55,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           const SizedBox(height: 35),
           TextButton(
-            onPressed: null,
+            onPressed: _signUpHandle,
             child: Container(
               height: 57,
               margin: const EdgeInsets.only(left: 15, right: 15),
@@ -74,17 +80,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  // _signUpHandle() async {
-  //   String email = _emailController.text;
-  //   String password = _passwordController.text;
-  //   String checkPassword = _checkPasswordController.text;
+  _signUpHandle() async {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+    String username = _usernameController.text;
 
-  //   if (checkPassword != password) {
-  //     // todo
-  //   }
-
-  //   User? user = await _auth.signUp(email, password);
-
-  //   print("user is successfully created");
-  // }
+    UserEntity? user = await _authService.signUp(username, email, password);
+    if (user != null) {
+      print("Sign Up success!!");
+      Navigator.pushNamed(context, "main", arguments: (user));
+    } else {
+      print("Sign Up Wrong!!");
+    }
+  }
 }

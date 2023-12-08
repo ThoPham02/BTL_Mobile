@@ -7,9 +7,20 @@ import 'package:task_management/models/card_entity.dart';
 import 'package:task_management/models/task_entity.dart';
 import 'package:task_management/models/user_entity.dart';
 import 'package:task_management/screens/main_screen/mainhome/mainhome_cubit.dart';
+import 'package:task_management/screens/main_screen/widgets/bottom_bar.dart';
+import 'package:task_management/screens/main_screen/widgets/home_appbar.dart';
 
 class MainhomeScreen extends StatefulWidget {
-  const MainhomeScreen({Key? key}) : super(key: key);
+  const MainhomeScreen({
+    Key? key,
+    required this.setDrawState,
+    required this.userInfo,
+    required this.pageController,
+  }) : super(key: key);
+
+  final Function setDrawState;
+  final UserEntity userInfo;
+  final PageController pageController;
 
   @override
   State<MainhomeScreen> createState() => _MainhomeScreenState();
@@ -19,19 +30,12 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
   final PageController controller = PageController();
   late final MainhomeCubit _cubit;
 
-  final UserEntity _userInfo = UserEntity(
-    email: "tholgbg2002@gmail.com",
-    name: "Tho test firebase",
-    password: "",
-    userID: "123456",
-  );
-
   final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
     _cubit = MainhomeCubit();
-    _cubit.filterCard(_userInfo.userID ?? "", "");
+    _cubit.filterCard(widget.userInfo.userID ?? "", "");
     super.initState();
   }
 
@@ -53,7 +57,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
         return previous != current;
       }, builder: (context, state) {
         return Scaffold(
-          appBar: _homeAppBar(),
+          appBar: HomeAppBar(setDrawState: widget.setDrawState),
           body: ListView(
             scrollDirection: Axis.vertical,
             children: [
@@ -63,80 +67,9 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
               _listTask(state),
             ],
           ),
-          bottomNavigationBar: _mainBottomNavigationBar(),
+          bottomNavigationBar: BottomBar(controller: widget.pageController),
         );
       }),
-    );
-  }
-
-  BottomNavigationBar _mainBottomNavigationBar() {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      onTap: (index) {},
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
-      items: [
-        BottomNavigationBarItem(
-          label: "",
-          icon: Center(
-            child: Container(
-              width: 46,
-              height: 46,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: whiteColor20,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: SvgPicture.asset("assets/vectors/home_icon.svg"),
-            ),
-          ),
-        ),
-        BottomNavigationBarItem(
-          label: "",
-          icon: Center(
-            child: Container(
-              width: 46,
-              height: 46,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: whiteColor20,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: SvgPicture.asset("assets/vectors/activity_icon.svg"),
-            ),
-          ),
-        ),
-        BottomNavigationBarItem(
-          label: "",
-          icon: Center(
-            child: Container(
-              width: 46,
-              height: 46,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: whiteColor20,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: SvgPicture.asset("assets/vectors/user_icon.svg"),
-            ),
-          ),
-        ),
-        BottomNavigationBarItem(
-          label: "",
-          icon: Center(
-            child: Container(
-              width: 46,
-              height: 46,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: mainColor,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: SvgPicture.asset("assets/vectors/plus_icon.svg"),
-            ),
-          ),
-        ),
-      ],
     );
   }
 
@@ -193,8 +126,11 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
             color: mainColor,
           ),
         ),
-        SizedBox(
-          height: 225,
+        ConstrainedBox(
+          constraints: const BoxConstraints(
+            minHeight: 75,
+            maxHeight: 225,
+          ),
           child: ListView.builder(
             itemCount: state.listTask.length,
             scrollDirection: Axis.vertical,
@@ -313,7 +249,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
   GestureDetector _cardWidget(String currentCard, CardEntity item) {
     return GestureDetector(
       onTap: () {
-        _cubit.changeCurrentTab(_userInfo.userID, item.cardID);
+        _cubit.changeCurrentTab(widget.userInfo.userID, item.cardID);
       },
       child: Container(
         width: 150,
@@ -384,7 +320,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
                   ),
                 ),
                 TextSpan(
-                  text: '${_userInfo.name}',
+                  text: '${widget.userInfo.name}',
                   style: const TextStyle(
                     color: mainColor,
                     fontSize: 15,
@@ -417,7 +353,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
       child: TextField(
         controller: _searchController,
         onChanged: (text) {
-          _cubit.filterCard(_userInfo.userID ?? "", text);
+          _cubit.filterCard(widget.userInfo.userID ?? "", text);
         },
         decoration: InputDecoration(
           hintText: "Search Your Task",
@@ -434,57 +370,6 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  AppBar _homeAppBar() {
-    return AppBar(
-      backgroundColor: whiteColor,
-      elevation: 0.0,
-      leading: GestureDetector(
-        onTap: null,
-        child: Container(
-          width: 46,
-          height: 46,
-          padding: const EdgeInsets.all(10),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: whiteColor,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: SvgPicture.asset('assets/vectors/menu.svg'),
-        ),
-      ),
-      actions: [
-        GestureDetector(
-          onTap: null,
-          child: Container(
-            width: 46,
-            height: 46,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: whiteColor,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: SvgPicture.asset('assets/vectors/bell_icon.svg'),
-          ),
-        ),
-        const SizedBox(width: 10),
-        GestureDetector(
-          onTap: null,
-          child: Container(
-            width: 46,
-            height: 46,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: whiteColor,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Image.asset("assets/images/avatar.png"),
-          ),
-        ),
-        const SizedBox(width: 20),
-      ],
     );
   }
 }

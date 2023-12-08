@@ -3,8 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:task_management/constants/style.dart';
+import 'package:task_management/models/user_entity.dart';
 import 'package:task_management/screens/auth_screen/widgets/auth_header.dart';
 import 'package:task_management/screens/auth_screen/widgets/input.dart';
+import 'package:task_management/services/firebase_auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen(
@@ -18,6 +20,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final FirebaseAuthService _authService = FirebaseAuthService();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -60,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           TextButton(
-            onPressed: null,
+            onPressed: _signInHandle,
             child: Container(
               height: 57,
               margin: const EdgeInsets.only(left: 15, right: 15),
@@ -144,15 +147,17 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // _loginHandle() async {
-  //   String email = _emailController.text;
-  //   String password = _passwordController.text;
+  _signInHandle() async {
+    String email = _emailController.text;
+    String password = _passwordController.text;
 
-  //   User? user = await _auth.signIn(email, password);
+    UserEntity? user = await _authService.signIn(email, password);
 
-  //   if (user != null) {
-  //     print(user.uid);
-  //     Navigator.pushNamed(context, "/mainhome");
-  //   }
-  // }
+    if (user != null) {
+      print("Login success!!");
+      Navigator.pushNamed(context, "main", arguments: (user));
+    } else {
+      print("Login Wrong!!");
+    }
+  }
 }
