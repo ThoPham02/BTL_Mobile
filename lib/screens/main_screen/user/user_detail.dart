@@ -22,7 +22,11 @@ class UserDetail extends StatelessWidget {
         elevation: 0.0,
         leading: GestureDetector(
           onTap: () {
-            pageController?.jumpToPage(0);
+            try {
+              pageController?.jumpToPage(0);
+            } catch (e) {
+              Navigator.pop(context);
+            }
           },
           child: Container(
             width: 46,

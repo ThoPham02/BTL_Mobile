@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:task_management/constants/style.dart';
 import 'package:task_management/models/user_entity.dart';
+import 'package:task_management/screens/main_screen/mainhome/notification/notification_screen.dart';
 import 'package:task_management/screens/main_screen/user/user_detail.dart';
 import 'package:task_management/screens/main_screen/widgets/bottom_bar.dart';
 import 'package:task_management/screens/main_screen/widgets/user_category.dart';
@@ -82,6 +83,7 @@ class _UserScreenState extends State<UserScreen> {
                         SvgPicture.asset("assets/vectors/bell_icon.svg"),
                     title: "Notification",
                     subIcon: CupertinoIcons.chevron_right,
+                    controller: pageController,
                   ),
                   UserCategory(
                     color: pupleColor,

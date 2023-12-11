@@ -19,7 +19,11 @@ class BottomBar extends StatelessWidget {
           label: "",
           icon: GestureDetector(
             onTap: () {
-              controller.jumpToPage(0);
+              try {
+                controller.jumpToPage(0);
+              } catch (e) {
+                Navigator.pop(context);
+              }
             },
             child: Center(
               child: Container(
@@ -39,7 +43,11 @@ class BottomBar extends StatelessWidget {
           label: "",
           icon: GestureDetector(
             onTap: () {
-              controller.jumpToPage(1);
+              try {
+                controller.jumpToPage(1);
+              } catch (e) {
+                Navigator.pop(context);
+              }
             },
             child: Center(
               child: Container(
@@ -59,7 +67,11 @@ class BottomBar extends StatelessWidget {
           label: "",
           icon: GestureDetector(
             onTap: () {
-              controller.jumpToPage(2);
+              try {
+                controller.jumpToPage(2);
+              } catch (e) {
+                Navigator.pop(context);
+              }
             },
             child: Center(
               child: Container(
@@ -79,7 +91,11 @@ class BottomBar extends StatelessWidget {
           label: "",
           icon: GestureDetector(
             onTap: () {
-              controller.jumpToPage(3);
+              try {
+                controller.jumpToPage(3);
+              } catch (e) {
+                Navigator.pop(context);
+              }
             },
             child: Center(
               child: Container(

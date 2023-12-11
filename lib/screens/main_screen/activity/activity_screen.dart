@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:task_management/screens/main_screen/widgets/bottom_bar.dart';
+import 'package:task_management/constants/style.dart';
+import 'package:intl/intl.dart';
 
 class ActivityScreen extends StatefulWidget {
   const ActivityScreen({super.key, required this.pageController});
@@ -13,27 +16,67 @@ class ActivityScreen extends StatefulWidget {
 
 class _ActivityScreenState extends State<ActivityScreen> {
   final int completedTasks = 84; // Giả sử có 84% tasks đã hoàn thành.
+  String formattedDate = DateFormat('d MMMM y').format(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: const Icon(Icons.menu),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.filter_list),
-              onPressed: () {},
+          backgroundColor: whiteColor,
+          elevation: 0.0,
+          leading: GestureDetector(
+            onTap: () {
+              // setDrawState!(); // Uncomment và thay thế bằng hàm thực tế để mở menu
+            },
+            child: Container(
+              width: 46,
+              height: 46,
+              padding: const EdgeInsets.all(10),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: whiteColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: SvgPicture.asset('assets/vectors/menu.svg'),
             ),
+          ),
+          actions: <Widget>[
+            GestureDetector(
+              onTap: () {
+                // Thêm hành động của bạn ở đây, ví dụ mở một trang hoặc hiển thị một thông báo
+              },
+              child: Container(
+                width: 46,
+                height: 46,
+                padding: const EdgeInsets.all(10),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: whiteColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: SvgPicture.asset(
+                    'assets/vectors/filter.svg'), // Thay thế 'your_icon.svg' bằng đường dẫn tới icon của bạn
+              ),
+            ),
+            const SizedBox(
+                width: 16), // Để tạo khoảng cách giữa các action item nếu cần
           ],
-          title: const Text('Today'),
-          centerTitle: true,
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             const Text(
-              '12 December, 2020',
+              'Today',
               style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20, // Adjust font size as needed
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              formattedDate,
+              style: const TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 13,
               ),
@@ -137,63 +180,59 @@ class _ActivityScreenState extends State<ActivityScreen> {
                 ),
               ),
             ),
-            Expanded(
-              child: Container(
-                height: 348.96,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(0, 4),
-                      blurRadius: 50,
-                      spreadRadius: 0,
-                      color: Color.fromRGBO(197, 197, 197, 0.27),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(50),
-                    topLeft: Radius.circular(50),
+            Container(
+              height: 270,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0, 4),
+                    blurRadius: 50,
+                    spreadRadius: 0,
+                    color: Color.fromRGBO(197, 197, 197, 0.27),
                   ),
-                  color: Colors.white,
+                ],
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(50),
+                  topLeft: Radius.circular(50),
                 ),
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      width: 180,
-                      height: 180,
-                      child: CircularProgressIndicator(
-                        value: completedTasks / 100,
-                        backgroundColor: Colors.grey[300],
-                        valueColor: const AlwaysStoppedAnimation<Color>(
-                            Color.fromRGBO(249, 112, 87, 1)),
-                        strokeWidth: 10,
+                color: Colors.white,
+              ),
+              child: Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    width: 180,
+                    height: 180,
+                    child: CircularProgressIndicator(
+                      value: completedTasks / 100,
+                      backgroundColor: Colors.grey[300],
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                          Color.fromRGBO(249, 112, 87, 1)),
+                      strokeWidth: 10,
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        '$completedTasks%',
+                        style: const TextStyle(
+                          fontSize: 36,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    // Thêm Text vào đây
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          '$completedTasks%', // Đảm bảo completedTasks là một biến mà bạn đã định nghĩa và tính toán giá trị phần trăm
-                          style: const TextStyle(
-                            fontSize:
-                                36, // Điều chỉnh kích thước chữ theo yêu cầu của bạn
-                            fontWeight: FontWeight.bold,
-                          ),
+                      const Text(
+                        'Tasks completed',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Color.fromRGBO(48, 48, 48, 0.5),
                         ),
-                        const Text(
-                          'Tasks completed',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: Color.fromRGBO(48, 48, 48, 0.5),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             )
           ],
