@@ -83,7 +83,6 @@ class _UserScreenState extends State<UserScreen> {
                         SvgPicture.asset("assets/vectors/bell_icon.svg"),
                     title: "Notification",
                     subIcon: CupertinoIcons.chevron_right,
-                    controller: pageController,
                   ),
                   UserCategory(
                     color: pupleColor,
