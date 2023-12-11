@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:task_management/models/user_entity.dart';
+import 'package:task_management/screens/auth_screen/auth_controller.dart';
+import 'package:task_management/screens/main_screen/activity/activity_screen.dart';
+import 'package:task_management/screens/main_screen/user/user_detail.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen(
@@ -14,6 +17,7 @@ class DrawerScreen extends StatefulWidget {
 }
 
 class _DrawerScreenState extends State<DrawerScreen> {
+  final PageController _controller = PageController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,20 +48,20 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   ),
                 ),
                 const SizedBox(width: 10),
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Jessie Yaegar',
-                        style: TextStyle(
+                        widget.userInfo.name ?? 'Your username',
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                           fontSize: 16,
                         ),
                       ),
-                      Text(
-                        'Indonesia',
+                      const Text(
+                        'Vietnam', // Mặc định là Vietnam, có thể lấy IP từ phía người dùng sau đó lấy dữ liệu trả về từ API làm country
                         style: TextStyle(
                           color: Color.fromRGBO(255, 255, 255, 0.8),
                           fontSize: 14,
@@ -72,46 +76,70 @@ class _DrawerScreenState extends State<DrawerScreen> {
           const SizedBox(
             height: 30,
           ),
-          const Column(
-            children: [
+          Column(
+            children: <Widget>[
               ListTile(
-                title: Text('Manage Account',
+                title: const Text('Manage Account',
                     style:
                         TextStyle(color: Color.fromRGBO(255, 255, 255, 0.8))),
-                leading: Icon(Icons.person,
+                leading: const Icon(Icons.person,
                     color: Color.fromRGBO(255, 255, 255, 0.8)),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UserDetail(
+                                user: widget.userInfo,
+                                pageController: _controller,
+                              )));
+                },
               ),
-              SizedBox(height: 10),
-              ListTile(
+              const SizedBox(height: 10),
+              const ListTile(
                 title: Text('Search Tasks',
                     style:
                         TextStyle(color: Color.fromRGBO(255, 255, 255, 0.8))),
                 leading: Icon(Icons.search,
                     color: Color.fromRGBO(255, 255, 255, 0.8)),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ListTile(
-                title: Text('Activity',
+                title: const Text('Activity',
                     style:
                         TextStyle(color: Color.fromRGBO(255, 255, 255, 0.8))),
-                leading: Icon(Icons.show_chart,
+                leading: const Icon(Icons.show_chart,
                     color: Color.fromRGBO(255, 255, 255, 0.8)),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ActivityScreen(pageController: _controller)),
+                  );
+                },
               ),
-              SizedBox(height: 10),
-              ListTile(
+              const SizedBox(height: 10),
+              const ListTile(
                 title: Text('App Settings',
                     style:
                         TextStyle(color: Color.fromRGBO(255, 255, 255, 0.8))),
                 leading: Icon(Icons.settings,
                     color: Color.fromRGBO(255, 255, 255, 0.8)),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ListTile(
-                title: Text('Logout',
+                title: const Text('Logout',
                     style:
                         TextStyle(color: Color.fromRGBO(255, 255, 255, 0.8))),
-                leading: Icon(Icons.logout,
+                leading: const Icon(Icons.logout,
                     color: Color.fromRGBO(255, 255, 255, 0.8)),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AuthController()),
+                  );
+                },
               ),
             ],
           ),

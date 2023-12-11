@@ -152,6 +152,8 @@ class _LoginScreenState extends State<LoginScreen> {
     String password = _passwordController.text;
 
     UserEntity? user = await _authService.signIn(email, password);
+    // print(email);
+    // print(password);
 
     if (user != null) {
       print("Login success!!");

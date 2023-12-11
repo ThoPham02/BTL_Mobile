@@ -36,6 +36,7 @@ class MainhomeCubit extends Cubit<MainhomeState> {
 
   filterCard(String userID, searchStr) async {
     List<CardEntity>? cardRes = await _firestore.listCard(userID, searchStr);
+    // ignore: avoid_print
     print(cardRes?.length);
     emit(
       state.copyWith(
