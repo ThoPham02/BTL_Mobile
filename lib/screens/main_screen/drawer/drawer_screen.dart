@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:task_management/models/user_entity.dart';
+import 'package:task_management/screens/main_screen/drawer/log_out_service.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen(
@@ -72,46 +73,49 @@ class _DrawerScreenState extends State<DrawerScreen> {
           const SizedBox(
             height: 30,
           ),
-          const Column(
+          Column(
             children: [
-              ListTile(
+              const ListTile(
                 title: Text('Manage Account',
                     style:
                         TextStyle(color: Color.fromRGBO(255, 255, 255, 0.8))),
                 leading: Icon(Icons.person,
                     color: Color.fromRGBO(255, 255, 255, 0.8)),
               ),
-              SizedBox(height: 10),
-              ListTile(
+              const SizedBox(height: 10),
+              const ListTile(
                 title: Text('Search Tasks',
                     style:
                         TextStyle(color: Color.fromRGBO(255, 255, 255, 0.8))),
                 leading: Icon(Icons.search,
                     color: Color.fromRGBO(255, 255, 255, 0.8)),
               ),
-              SizedBox(height: 10),
-              ListTile(
+              const SizedBox(height: 10),
+              const ListTile(
                 title: Text('Activity',
                     style:
                         TextStyle(color: Color.fromRGBO(255, 255, 255, 0.8))),
                 leading: Icon(Icons.show_chart,
                     color: Color.fromRGBO(255, 255, 255, 0.8)),
               ),
-              SizedBox(height: 10),
-              ListTile(
+              const SizedBox(height: 10),
+              const ListTile(
                 title: Text('App Settings',
                     style:
                         TextStyle(color: Color.fromRGBO(255, 255, 255, 0.8))),
                 leading: Icon(Icons.settings,
                     color: Color.fromRGBO(255, 255, 255, 0.8)),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ListTile(
-                title: Text('Logout',
+                title: const Text('Logout',
                     style:
                         TextStyle(color: Color.fromRGBO(255, 255, 255, 0.8))),
-                leading: Icon(Icons.logout,
+                leading: const Icon(Icons.logout,
                     color: Color.fromRGBO(255, 255, 255, 0.8)),
+                onTap: () {
+                  LogOutService().Logout(context);
+                },
               ),
             ],
           ),
@@ -125,3 +129,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
     );
   }
 }
+
+// void performLogout(BuildContext context) {
+//   LogOutService().clearTokenAndLogout(context);
+// }
