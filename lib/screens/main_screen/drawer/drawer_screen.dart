@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:task_management/models/user_entity.dart';
-import 'package:task_management/screens/auth_screen/auth_controller.dart';
-import 'package:task_management/screens/main_screen/activity/activity_screen.dart';
-import 'package:task_management/screens/main_screen/user/user_detail.dart';
+import 'package:task_management/screens/main_screen/drawer/log_out_service.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen(
@@ -17,7 +15,6 @@ class DrawerScreen extends StatefulWidget {
 }
 
 class _DrawerScreenState extends State<DrawerScreen> {
-  final PageController _controller = PageController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,20 +45,20 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   ),
                 ),
                 const SizedBox(width: 10),
-                Expanded(
+                const Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        widget.userInfo.name ?? 'Your username',
-                        style: const TextStyle(
+                        'Jessie Yaegar',
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                           fontSize: 16,
                         ),
                       ),
-                      const Text(
-                        'Vietnam', // Mặc định là Vietnam, có thể lấy IP từ phía người dùng sau đó lấy dữ liệu trả về từ API làm country
+                      Text(
+                        'Indonesia',
                         style: TextStyle(
                           color: Color.fromRGBO(255, 255, 255, 0.8),
                           fontSize: 14,
@@ -77,22 +74,13 @@ class _DrawerScreenState extends State<DrawerScreen> {
             height: 30,
           ),
           Column(
-            children: <Widget>[
-              ListTile(
-                title: const Text('Manage Account',
+            children: [
+              const ListTile(
+                title: Text('Manage Account',
                     style:
                         TextStyle(color: Color.fromRGBO(255, 255, 255, 0.8))),
-                leading: const Icon(Icons.person,
+                leading: Icon(Icons.person,
                     color: Color.fromRGBO(255, 255, 255, 0.8)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => UserDetail(
-                                user: widget.userInfo,
-                                pageController: _controller,
-                              )));
-                },
               ),
               const SizedBox(height: 10),
               const ListTile(
@@ -103,20 +91,12 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     color: Color.fromRGBO(255, 255, 255, 0.8)),
               ),
               const SizedBox(height: 10),
-              ListTile(
-                title: const Text('Activity',
+              const ListTile(
+                title: Text('Activity',
                     style:
                         TextStyle(color: Color.fromRGBO(255, 255, 255, 0.8))),
-                leading: const Icon(Icons.show_chart,
+                leading: Icon(Icons.show_chart,
                     color: Color.fromRGBO(255, 255, 255, 0.8)),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ActivityScreen(pageController: _controller)),
-                  );
-                },
               ),
               const SizedBox(height: 10),
               const ListTile(
@@ -134,11 +114,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 leading: const Icon(Icons.logout,
                     color: Color.fromRGBO(255, 255, 255, 0.8)),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AuthController()),
-                  );
+                  LogOutService().Logout(context);
                 },
               ),
             ],
@@ -153,3 +129,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
     );
   }
 }
+
+// void performLogout(BuildContext context) {
+//   LogOutService().clearTokenAndLogout(context);
+// }
