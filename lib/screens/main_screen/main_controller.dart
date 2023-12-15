@@ -21,6 +21,8 @@ class _MainControllerState extends State<MainController> {
   double scaleFactor = 1;
   bool isDrawerOpen = false;
 
+  String cardID = "";
+
   setDrawerOpen() {
     setState(() {
       xOffset = 300;
@@ -39,6 +41,12 @@ class _MainControllerState extends State<MainController> {
     });
   }
 
+  setCardID(String card) {
+    setState(() {
+      cardID = card;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final UserEntity user =
@@ -48,6 +56,7 @@ class _MainControllerState extends State<MainController> {
     if (user.userID == "") {
       Navigator.pushNamed(context, "auth");
     }
+    print(cardID);
     return Scaffold(
       body: Stack(
         children: [
@@ -67,6 +76,7 @@ class _MainControllerState extends State<MainController> {
                   setDrawState: setDrawerOpen,
                   userInfo: user,
                   pageController: _controller,
+                  setCard: setCardID,
                 ),
                 ActivityScreen(
                   pageController: _controller,
@@ -77,6 +87,8 @@ class _MainControllerState extends State<MainController> {
                 ),
                 AddTaskScreen(
                   pageController: _controller,
+                  userID: user.userID ?? "",
+                  cardID: cardID,
                 ),
               ],
             ),

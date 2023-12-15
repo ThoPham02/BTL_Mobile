@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:task_management/constants/global_variables.dart';
 import 'package:task_management/models/card_entity.dart';
@@ -47,6 +49,8 @@ class FireStorageService {
   }
 
   Future<CardEntity?> getCard(String userID, String cardID) async {
+    print("$DB_COLLECTION/$userID/$CARD_COLLECTION");
+    print(cardID);
     DocumentSnapshot<Object?> cardData = await FirebaseFirestore.instance
         .collection("$DB_COLLECTION/$userID/$CARD_COLLECTION")
         .doc(cardID)

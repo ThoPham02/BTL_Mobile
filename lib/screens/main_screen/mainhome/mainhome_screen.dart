@@ -16,12 +16,13 @@ class MainhomeScreen extends StatefulWidget {
     required this.setDrawState,
     required this.userInfo,
     required this.pageController,
+    required this.setCard,
   }) : super(key: key);
 
   final Function setDrawState;
   final UserEntity userInfo;
   final PageController pageController;
-
+  final Function setCard;
   @override
   State<MainhomeScreen> createState() => _MainhomeScreenState();
 }
@@ -250,6 +251,7 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
     return GestureDetector(
       onTap: () {
         _cubit.changeCurrentTab(widget.userInfo.userID, item.cardID);
+        widget.setCard(item.cardID);
       },
       child: Container(
         width: 150,

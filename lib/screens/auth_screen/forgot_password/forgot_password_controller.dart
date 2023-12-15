@@ -55,5 +55,7 @@ class _ForgotPasswordControllerState extends State<ForgotPasswordController> {
     );
   }
 
-  _updatePassword() async {}
+  _updatePassword() async {
+    
+  }
 }

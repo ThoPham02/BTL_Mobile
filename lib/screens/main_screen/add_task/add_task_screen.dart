@@ -2,17 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_management/constants/style.dart';
+import 'package:task_management/models/task_entity.dart';
 import 'package:task_management/screens/auth_screen/widgets/input.dart';
 import 'package:task_management/screens/main_screen/add_task/add_task_cubit.dart';
 import 'package:task_management/screens/main_screen/widgets/bottom_bar.dart';
-import 'package:task_management/screens/main_screen/widgets/drowdown_card.dart';
-import 'package:task_management/screens/main_screen/widgets/pick_date.dart';
 import 'package:task_management/screens/main_screen/widgets/pick_time.dart';
 
 class AddTaskScreen extends StatefulWidget {
-  const AddTaskScreen({super.key, required this.pageController});
+  const AddTaskScreen({
+    super.key,
+    required this.pageController,
+    required this.userID,
+    required this.cardID,
+  });
 
   final PageController pageController;
+  final String userID;
+  final String cardID;
 
   @override
   State<AddTaskScreen> createState() => _AddTaskScreenState();
@@ -36,6 +42,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.cardID);
     return BlocProvider(
       create: (context) {
         return _cubit;
@@ -82,11 +89,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               const SizedBox(
                 height: 5,
               ),
-              DropDownCard(
-                cards: state.cards ?? [],
-                onCardSelect: _cubit.setCard,
-                fillColor: state.invalidInput ? redColor : whiteColor,
-              ),
+              // DropDownCard(
+              //   cards: state.cards ?? [],
+              //   onCardSelect: _cubit.setCard,
+              //   fillColor: state.invalidInput ? redColor : whiteColor,
+              // ),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 25),
                 child: Input(
@@ -107,10 +114,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   fillColor: state.invalidInput ? redColor : whiteColor,
                 ),
               ),
-              PickDate(
-                onDateSelected: _cubit.setDate,
-                fillColor: state.invalidInput ? redColor : whiteColor,
-              ),
+              // PickDate(
+              //   onDateSelected: _cubit.setDate,
+              //   fillColor: state.invalidInput ? redColor : whiteColor,
+              // ),
               PickTime(
                 title: "Time Start",
                 onTimeSelected: _cubit.setTimeStart,
@@ -121,18 +128,25 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 onTimeSelected: _cubit.setTimeEnd,
                 fillColor: state.invalidInput ? redColor : whiteColor,
               ),
-              Container(
-                height: 46,
-                margin: const EdgeInsets.symmetric(horizontal: 25),
-                decoration: BoxDecoration(
-                  color: mainColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: GestureDetector(
-                  onTap: () {
-                    _cubit.addTask(_nameController.text.trim(),
-                        _desController.text.trim());
-                  },
+              InkWell(
+                onTap: () async {
+                  TaskEntity? task = await _cubit.addTask(
+                    widget.userID,
+                    widget.cardID,
+                    _nameController.text.trim(),
+                    _desController.text.trim(),
+                  );
+                  if (task != null) {
+                    widget.pageController.jumpToPage(0);
+                  }
+                },
+                child: Container(
+                  height: 46,
+                  margin: const EdgeInsets.symmetric(horizontal: 25),
+                  decoration: BoxDecoration(
+                    color: mainColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   child: const Center(
                       child: Text(
                     "Create Task",

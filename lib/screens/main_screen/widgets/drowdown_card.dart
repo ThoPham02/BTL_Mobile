@@ -103,16 +103,19 @@ class _DropDownCardState extends State<DropDownCard> {
                   ),
                 ),
               ),
-              Container(
-                width: 46,
-                height: 46,
-                decoration: BoxDecoration(
-                  color: blackColor5,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: SvgPicture.asset(
-                  "assets/vectors/plus_icon.svg",
-                  color: mainColor,
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  width: 24,
+                  height: 24,
+                  decoration: BoxDecoration(
+                    color: blackColor5,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: SvgPicture.asset(
+                    "assets/vectors/plus_icon.svg",
+                    color: mainColor,
+                  ),
                 ),
               )
             ],
