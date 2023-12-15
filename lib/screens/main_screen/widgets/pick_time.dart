@@ -59,6 +59,7 @@ class _PickTimeState extends State<PickTime> {
                         setState(() {
                           selectedTime = pickedTime;
                         });
+                        widget.onTimeSelected(pickedTime);
                       }
                     });
                   },
