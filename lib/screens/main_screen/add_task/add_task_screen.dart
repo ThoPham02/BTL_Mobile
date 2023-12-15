@@ -111,8 +111,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 child: Input(
                   textController: _desController,
                   margin: false,
-                  title: "Task Descroption",
-                  hintText: "Descroption of this task!",
+                  title: "Task Description",
+                  hintText: "Description of this task!",
                   fillColor: state.invalidInput ? redColor : whiteColor,
                 ),
               ),
