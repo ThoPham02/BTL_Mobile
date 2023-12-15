@@ -80,17 +80,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
+  bool _validateEmail(String email) {
+    return email.contains('@') && email.contains('.');
+  }
+
   _signUpHandle() async {
     String email = _emailController.text;
     String password = _passwordController.text;
     String username = _usernameController.text;
 
+    if (!_validateEmail(email)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Email không hợp lệ. Vui lòng kiểm tra lại')),
+      );
+      return;
+    }
+
+    // Tiếp tục với quy trình đăng ký nếu email hợp lệ
     UserEntity? user = await _authService.signUp(username, email, password);
     if (user != null) {
       print("Sign Up success!!");
       Navigator.pushNamed(context, "main", arguments: (user));
     } else {
       print("Sign Up Wrong!!");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Đăng ký không thành công. Vui lòng thử lại')),
+      );
     }
   }
 }

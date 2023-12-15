@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
-import 'dart:ui';
 
 class Scene extends StatelessWidget {
   const Scene({super.key});

@@ -26,7 +26,11 @@ class _ActivityScreenState extends State<ActivityScreen> {
           elevation: 0.0,
           leading: GestureDetector(
             onTap: () {
-              // setDrawState!(); // Uncomment và thay thế bằng hàm thực tế để mở menu
+              try {
+                widget.pageController.jumpToPage(0);
+              } catch (e) {
+                Navigator.pop(context);
+              }
             },
             child: Container(
               width: 46,
