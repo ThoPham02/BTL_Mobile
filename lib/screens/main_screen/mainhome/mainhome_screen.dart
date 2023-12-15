@@ -223,26 +223,50 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 30, left: 25, bottom: 15),
-          child: Text(
-            "My Tasks",
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: fontWeightMedium,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(top: 30, left: 25, bottom: 15),
+              child: Text(
+                "My Tasks",
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: fontWeightMedium,
+                ),
+              ),
             ),
-          ),
+            const SizedBox(
+              width: 32,
+            ),
+            GestureDetector(
+              onTap: () {
+                widget.pageController.jumpToPage(4);
+              },
+              child: Container(
+                width: 24,
+                height: 24,
+                margin: const EdgeInsets.only(top: 12),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: mainColor,
+                ),
+                child: SvgPicture.asset("assets/vectors/plus_icon.svg"),
+              ),
+            )
+          ],
         ),
         SizedBox(
-            height: 200,
-            child: ListView.builder(
-              itemCount: state.listCard.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                CardEntity item = state.listCard[index];
-                return _cardWidget(state.currentCard, item);
-              },
-            ))
+          height: 200,
+          child: ListView.builder(
+            itemCount: state.listCard.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              CardEntity item = state.listCard[index];
+              return _cardWidget(state.currentCard, item);
+            },
+          ),
+        )
       ],
     );
   }
