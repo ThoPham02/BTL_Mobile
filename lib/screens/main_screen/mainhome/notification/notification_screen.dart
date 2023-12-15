@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class Task {
   final String name;
@@ -29,6 +30,15 @@ class NotificationScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IconButton(
+                icon: SvgPicture.asset('assets/icons/icon_back.svg'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 17),
