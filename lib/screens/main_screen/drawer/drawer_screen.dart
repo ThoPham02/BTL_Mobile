@@ -52,20 +52,20 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   ),
                 ),
                 const SizedBox(width: 10),
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Jessie Yaegar',
-                        style: TextStyle(
+                        widget.userInfo.name ?? "Your username",
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                           fontSize: 16,
                         ),
                       ),
-                      Text(
-                        'Indonesia',
+                      const Text(
+                        'Vietnam', // Mặc định là Vietnam, có thể lấy IP từ phía người dùng sau đó lấy dữ liệu trả về từ API làm country
                         style: TextStyle(
                           color: Color.fromRGBO(255, 255, 255, 0.8),
                           fontSize: 14,
