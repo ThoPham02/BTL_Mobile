@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_management/models/user_entity.dart';
 import 'package:task_management/screens/main_screen/activity/activity_screen.dart';
+import 'package:task_management/screens/main_screen/add_card/add_card_screen.dart';
 import 'package:task_management/screens/main_screen/add_task/add_task_screen.dart';
 import 'package:task_management/screens/main_screen/drawer/drawer_screen.dart';
 import 'package:task_management/screens/main_screen/mainhome/mainhome_screen.dart';
@@ -91,6 +92,10 @@ class _MainControllerState extends State<MainController> {
                   userID: user.userID ?? "",
                   cardID: cardID,
                 ),
+                AddCardScreen(
+                  pageController: _controller,
+                  userID: user.userID ?? "",
+                )
               ],
             ),
           )
