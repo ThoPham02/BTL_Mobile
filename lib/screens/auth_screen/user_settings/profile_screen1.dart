@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
-import 'dart:ui';
+// import 'package:flutter/gestures.dart';
+// import 'dart:ui';
 
 class Scene extends StatelessWidget {
   const Scene({super.key});
@@ -398,46 +398,44 @@ class Scene extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Container(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.fromLTRB(
-                                    0 * fem, 0 * fem, 24.34 * fem, 0 * fem),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.fromLTRB(
+                                  0 * fem, 0 * fem, 24.34 * fem, 0 * fem),
+                              width: 46 * fem,
+                              height: 46 * fem,
+                              child: Image.asset(
+                                'assets/page-1/images/auto-group-oikp.png',
                                 width: 46 * fem,
                                 height: 46 * fem,
-                                child: Image.asset(
-                                  'assets/page-1/images/auto-group-oikp.png',
-                                  width: 46 * fem,
-                                  height: 46 * fem,
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.fromLTRB(
+                                  0 * fem, 0 * fem, 168.16 * fem, 0 * fem),
+                              child: Text(
+                                'About Us',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 14 * ffem,
+                                  fontWeight: FontWeight.w500,
+                                  height: 1.4249999183 * ffem / fem,
+                                  color: const Color(0xff303030),
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(
-                                    0 * fem, 0 * fem, 168.16 * fem, 0 * fem),
-                                child: Text(
-                                  'About Us',
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 14 * ffem,
-                                    fontWeight: FontWeight.w500,
-                                    height: 1.4249999183 * ffem / fem,
-                                    color: const Color(0xff303030),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
+                            ),
+                            SizedBox(
+                              width: 5 * fem,
+                              height: 10 * fem,
+                              child: Image.asset(
+                                'assets/page-1/images/chevron-up.png',
                                 width: 5 * fem,
                                 height: 10 * fem,
-                                child: Image.asset(
-                                  'assets/page-1/images/chevron-up.png',
-                                  width: 5 * fem,
-                                  height: 10 * fem,
-                                ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

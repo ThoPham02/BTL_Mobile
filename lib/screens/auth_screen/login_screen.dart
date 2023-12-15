@@ -147,9 +147,21 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  bool _validateEmail(String email) {
+    return email.contains('@') && email.contains('.');
+  }
+
   _signInHandle() async {
     String email = _emailController.text;
     String password = _passwordController.text;
+
+    // Kiểm tra email hợp lệ trước khi thực hiện đăng nhập
+    if (!_validateEmail(email)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Vui lòng sử dụng Email để đăng nhập')),
+      );
+      return;
+    }
 
     UserEntity? user = await _authService.signIn(email, password);
     // print(email);
@@ -160,6 +172,10 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.pushNamed(context, "main", arguments: (user));
     } else {
       print("Login Wrong!!");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text("Đăng nhập không thành công. Vui lòng thử lại")),
+      );
     }
   }
 }

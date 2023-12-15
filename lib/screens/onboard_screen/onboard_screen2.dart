@@ -19,7 +19,7 @@ class _OnboardScreen2State extends State<OnboardScreen2> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           SizedBox(
-            height: 350,
+            height: 490,
             width: double.infinity,
             child: Image.asset("assets/images/onboard2.png"),
           ),

@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:task_management/models/user_entity.dart';
+import 'package:task_management/screens/main_screen/activity/activity_screen.dart';
 import 'package:task_management/screens/main_screen/drawer/log_out_service.dart';
+import 'package:task_management/screens/main_screen/user/user_detail.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen(
-      {super.key, required this.userInfo, required this.setDrawState});
+      {super.key,
+      required this.userInfo,
+      required this.setDrawState,
+      required this.pageController});
 
   final UserEntity userInfo;
   final Function setDrawState;
+  final PageController pageController;
 
   @override
   State<DrawerScreen> createState() => _DrawerScreenState();
 }
 
 class _DrawerScreenState extends State<DrawerScreen> {
+  final PageController _controller = PageController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -75,12 +82,23 @@ class _DrawerScreenState extends State<DrawerScreen> {
           ),
           Column(
             children: [
-              const ListTile(
-                title: Text('Manage Account',
+              ListTile(
+                title: const Text('Manage Account',
                     style:
                         TextStyle(color: Color.fromRGBO(255, 255, 255, 0.8))),
-                leading: Icon(Icons.person,
+                leading: const Icon(Icons.person,
                     color: Color.fromRGBO(255, 255, 255, 0.8)),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UserDetail(
+                        user: widget.userInfo,
+                        pageController: _controller,
+                      ),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 10),
               const ListTile(
@@ -91,12 +109,22 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     color: Color.fromRGBO(255, 255, 255, 0.8)),
               ),
               const SizedBox(height: 10),
-              const ListTile(
-                title: Text('Activity',
+              ListTile(
+                title: const Text('Activity',
                     style:
                         TextStyle(color: Color.fromRGBO(255, 255, 255, 0.8))),
-                leading: Icon(Icons.show_chart,
+                leading: const Icon(Icons.show_chart,
                     color: Color.fromRGBO(255, 255, 255, 0.8)),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ActivityScreen(
+                        pageController: _controller,
+                      ),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 10),
               const ListTile(

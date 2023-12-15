@@ -1,4 +1,4 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
+// ignore_for_file: no_leading_underscores_for_local_identifiers, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:task_management/models/user_entity.dart';
@@ -63,6 +63,7 @@ class _MainControllerState extends State<MainController> {
           DrawerScreen(
             userInfo: user,
             setDrawState: setDrawerClose,
+            pageController: _controller,
           ),
           AnimatedContainer(
             transform: Matrix4.translationValues(xOffset, yOffset, 0)
