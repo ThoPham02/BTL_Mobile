@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:task_management/constants/style.dart';
+import 'package:task_management/screens/main_screen/mainhome/notification/notification_screen.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({super.key, this.setDrawState});
@@ -32,8 +33,15 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: [
-        GestureDetector(
-          onTap: null,
+        InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => NotificationScreen(),
+              ),
+            );
+          },
           child: Container(
             width: 46,
             height: 46,
@@ -46,25 +54,22 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
         const SizedBox(width: 10),
-        GestureDetector(
-          onTap: null,
-          child: Container(
+        Container(
+          width: 46,
+          height: 46,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: whiteColor,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: SizedBox(
             width: 46,
             height: 46,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: whiteColor,
+            child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-            ),
-            child: SizedBox(
-              width: 46,
-              height: 46,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  "assets/images/avatar.jpg",
-                  fit: BoxFit.cover,
-                ),
+              child: Image.asset(
+                "assets/images/avatar.jpg",
+                fit: BoxFit.cover,
               ),
             ),
           ),

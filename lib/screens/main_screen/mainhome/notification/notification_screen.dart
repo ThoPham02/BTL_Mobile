@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:task_management/constants/style.dart';
 
 class Task {
   final String name;
@@ -24,21 +24,22 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: whiteColor, // Nền màu trắng cho AppBar
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back,
+              color: Colors.black), // Sử dụng icon quay lại có sẵn của Flutter
+          onPressed: () {
+            Navigator.of(context).pop(); // Quay lại màn hình trước đó
+          },
+        ),
+      ),
       body: Container(
         constraints: const BoxConstraints.expand(),
         color: const Color(0xFFFFFFFF),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
-                icon: SvgPicture.asset('assets/icons/icon_back.svg'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 17),
