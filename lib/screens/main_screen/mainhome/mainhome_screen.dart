@@ -7,6 +7,7 @@ import 'package:task_management/models/card_entity.dart';
 import 'package:task_management/models/task_entity.dart';
 import 'package:task_management/models/user_entity.dart';
 import 'package:task_management/screens/main_screen/mainhome/mainhome_cubit.dart';
+import 'package:task_management/screens/main_screen/mainhome/task/task_screen.dart';
 import 'package:task_management/screens/main_screen/widgets/bottom_bar.dart';
 import 'package:task_management/screens/main_screen/widgets/home_appbar.dart';
 
@@ -273,6 +274,14 @@ class _MainhomeScreenState extends State<MainhomeScreen> {
 
   GestureDetector _cardWidget(String currentCard, CardEntity item) {
     return GestureDetector(
+      onDoubleTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const TaskScreen(),
+          ),
+        );
+      },
       onTap: () {
         _cubit.changeCurrentTab(widget.userInfo.userID, item.cardID);
         widget.setCard(item.cardID);
